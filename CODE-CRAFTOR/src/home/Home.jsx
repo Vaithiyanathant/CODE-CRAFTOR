@@ -1,24 +1,25 @@
 /** @format */
 import styled from "styled-components";
 import { cursor, useTypewriter } from "react-simple-typewriter";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const github = () => {
 		window.open("https://github.com/Vaithiyanathant/CODE-CRAFTOR", "_blank");
-		};
-    const [typeEffect] = useTypewriter({
-			words: ["CodeCraftor", "a tool for coders"],
-			loop: { loopCount: 1 },
-			typeSpeed: 100,
-			deleteSpeed: 60,
-			cursor: {
-				show: true, // Show the cursor
-				blink: true, // Make the cursor blink
-				element: "|", // You can customize the cursor element
-				hideWhenDone: true, // Hide the cursor when typing is done
-				hideWhenNotStarted: false, // Do not hide the cursor when typing hasn't started
-			},
-		});
+	};
+	const [typeEffect] = useTypewriter({
+		words: ["CodeCraftor", "a tool for coders"],
+		loop: { loopCount: 1 },
+		typeSpeed: 100,
+		deleteSpeed: 60,
+		cursor: {
+			show: true, // Show the cursor
+			blink: true, // Make the cursor blink
+			element: "|", // You can customize the cursor element
+			hideWhenDone: true, // Hide the cursor when typing is done
+			hideWhenNotStarted: false, // Do not hide the cursor when typing hasn't started
+		},
+	});
 	return (
 		<HomeStyled>
 			<div className='home'>
@@ -46,16 +47,16 @@ export const Home = () => {
 								<li> Lorem ipsum dolor sit amet, consectetur adip</li>
 							</ul>
 							<div className='btns'>
-								<a
-									href='/signup'
+								<Link
+									to='/register'
 									className='signup'>
 									Get started!
-								</a>
-								<a
-									href='/login'
+								</Link>
+								<Link
+									to='/login'
 									className='login'>
 									Login
-								</a>
+								</Link>
 							</div>
 							<button
 								className='git'

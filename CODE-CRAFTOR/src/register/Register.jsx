@@ -1,5 +1,5 @@
 /** @format */
-
+import { Link } from "react-router-dom";
 import loginimage from "../assets/login.jpeg";
 
 export const Register = () => {
@@ -8,11 +8,13 @@ export const Register = () => {
 			<section className='regcon min-h-screen flex items-center justify-center '>
 				<div className='bg-[#31363c] flex rounded-2xl shadow-lg max-w-3xl p-4'>
 					<div className='sm:block hidden w-1/2'>
-						<img
-							className='sm:block hidden rounded-2xl'
-							alt='img-login'
-							src={loginimage}
-						/>
+						<Link to='/'>
+							<img
+								className='sm:block hidden rounded-2xl'
+								alt='img-login'
+								src={loginimage}
+							/>
+						</Link>
 					</div>
 					<div className='sm:w-1/2 px-16'>
 						<h2 className='font-bold text-2xl text-[white] text-center'>
@@ -61,13 +63,15 @@ export const Register = () => {
 							<p>
 								<a
 									href='#'
-									className="text-white">
+									className='text-white'>
 									If you already have an account?
 								</a>
 							</p>
-							<button className='py-2 px-5 bg-white text-black  border rounded-xl'>
-								Login
-							</button>
+							<Link to='/login'>
+								<button className='py-2 px-5 bg-white text-black  border rounded-xl'>
+									Login
+								</button>
+							</Link>
 						</div>
 					</div>
 				</div>

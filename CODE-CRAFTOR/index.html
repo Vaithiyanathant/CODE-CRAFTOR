@@ -1,13 +1,114 @@
-<!doctype html>
+<!-- @format -->
+
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CODE-CRAFTOR</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+	<head>
+		<meta charset="UTF-8" />
+		<link
+			rel="icon"
+			type="image/svg+xml"
+			href="" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>CODE-CRAFTOR</title>
+		<meta charset="UTF-8" />
+
+		<meta
+			name="description"
+			content="Free and open-source online code editor that allows you to write and execute code from a rich set of languages." />
+		<meta
+			name="keywords"
+			content="online editor, online code editor, online ide, online compiler, online interpreter, run code online, learn programming online,
+            online debugger, programming in browser, online code runner, online code execution, debug online, debug C code online, debug C++ code online,
+            programming online, snippet, snippets, code snippet, code snippets, pastebin, execute code, programming in browser, run c online, run C++ online,
+            run java online, run python online, run ruby online, run c# online, run rust online, run pascal online, run basic online" />
+		<meta
+			name="author"
+			content="Herman Zvonimir Došilović" />
+
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+
+		<meta
+			property="og:title"
+			content="Judge0 IDE - Free and open-source online code editor" />
+		<meta
+			property="og:description"
+			content="Free and open-source online code editor that allows you to write and execute code from a rich set of languages." />
+		<meta
+			property="og:image"
+			content="https://raw.githubusercontent.com/judge0/ide/master/.github/wallpaper.png" />
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+			integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+			crossorigin="anonymous"></script>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/goldenlayout.min.js"
+			integrity="sha256-NhJAZDfGgv4PiB+GVlSrPdh3uc75XXYSM4su8hgTchI="
+			crossorigin="anonymous"></script>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-base.css"
+			integrity="sha256-oIDR18yKFZtfjCJfDsJYpTBv1S9QmxYopeqw2dO96xM="
+			crossorigin="anonymous" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/golden-layout/1.5.9/css/goldenlayout-dark-theme.css"
+			integrity="sha256-ygw8PvSDJJUGLf6Q9KIQsYR3mOmiQNlDaxMLDOx9xL0="
+			crossorigin="anonymous" />
+
+		<script>
+			var require = {
+				paths: {
+					vs: "./vendor/monaco-editor-0.44.0/min/vs",
+				},
+			};
+		</script>
+		<script src="./vendor/monaco-editor-0.44.0/min/vs/loader.js"></script>
+		<script src="./vendor/monaco-editor-0.44.0/min/vs/editor/editor.main.nls.js"></script>
+		<script src="./vendor/monaco-editor-0.44.0/min/vs/editor/editor.main.js"></script>
+
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+			integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+			crossorigin="anonymous" />
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+			integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
+			crossorigin="anonymous"></script>
+
+		<link
+			href="https://fonts.googleapis.com/css?family=Exo+2"
+			rel="stylesheet" />
+
+		<script
+			type="text/javascript"
+			src="third_party/download.js"></script>
+
+		<script
+			type="text/javascript"
+			src="js/ide.js"></script>
+
+		<link
+			type="text/css"
+			rel="stylesheet"
+			href="css/ide.css" />
+
+		<title>Judge0 IDE - Free and open-source online code editor</title>
+		<link
+			rel="shortcut icon"
+			href="./favicon.ico"
+			type="image/x-icon" />
+	</head>
+	<body>
+		<div id="root"></div>
+		<script
+			type="module"
+			src="/src/main.jsx"></script>
+	</body>
 </html>

@@ -1,5 +1,13 @@
 /** @format */
 
+import Nav from "../Components/Nav";
+
+/** @format */
 export const Hometools = () => {
-	return <div>Hometools</div>;
+	return (
+		<>
+			<Nav></Nav>
+			<div className='regcon'>hellow </div>
+		</>
+	);
 };

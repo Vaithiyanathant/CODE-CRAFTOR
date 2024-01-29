@@ -1,5 +1,5 @@
 /** @format */
-
+import { Link } from "react-router-dom";
 import loginimage from "../assets/login.jpeg";
 export const Login = () => {
 	return (
@@ -70,7 +70,7 @@ export const Login = () => {
 						<p className='mt-5 text-xs border-b border-gray-400 py-4'>
 							<a
 								href=''
-								className='text-white' >
+								className='text-white'>
 								Forgot Your password?
 							</a>
 						</p>
@@ -83,21 +83,26 @@ export const Login = () => {
 									If you don't have an account?
 								</a>
 							</p>
-							<button className='py-2 px-5 bg-white border rounded-xl'>
-								Register
-							</button>
+							<Link to='/register'>
+								<button className='py-2 px-5 bg-white text-black  border rounded-xl'>
+									register
+								</button>
+							</Link>
 						</div>
 					</div>
 
 					{/* Image */}
 					<div className='sm:block hidden w-1/2'>
-						<img
-							className='sm:block hidden rounded-2xl'
-							alt='img-login'
-							src={loginimage}
-						/>
+						<Link to='/'>
+							<img
+								className='sm:block hidden rounded-2xl'
+								alt='img-login'
+								src={loginimage}
+							/>
+						</Link>
 					</div>
 				</div>
+
 				{/* =============== */}
 			</section>
 		</>
