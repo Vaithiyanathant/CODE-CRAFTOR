@@ -1,6 +1,6 @@
 /** @format */
 import { Link } from "react-router-dom";
-import loginimage from "../assets/login.jpeg";
+import loginimage from "../../assets/login.jpeg";
 
 export const Register = () => {
 	return (

@@ -1,10 +1,9 @@
 /** @format */
 
-import "./App.css";
-import { Login } from "./login/Login";
-import { Register } from "./register/Register";
-import { Home } from "./home/Home";
-import { Hometools } from "./Hometools/Hometools";
+import { Login } from "./Components/login/Login";
+import { Register } from "./Components/register/Register";
+import { Home } from "./Components/home/Home";
+import { Hometools } from "./Components/Hometools/Hometools";
 import { Routes, Route } from "react-router-dom";
 function App() {
 	return (

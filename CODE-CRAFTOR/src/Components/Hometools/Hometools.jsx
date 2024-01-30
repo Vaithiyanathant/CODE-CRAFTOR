@@ -1,6 +1,6 @@
 /** @format */
 
-import Nav from "../Components/Nav";
+import Nav from "./Nav";
 
 /** @format */
 export const Hometools = () => {
