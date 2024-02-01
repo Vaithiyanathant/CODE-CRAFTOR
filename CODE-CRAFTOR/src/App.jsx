@@ -3,7 +3,6 @@
 import { Login } from "./Components/login/Login";
 import { Register } from "./Components/register/Register";
 import { Home } from "./Components/home/Home";
-import { Hometools } from "./Components/Hometools/Hometools";
 import { Routes, Route } from "react-router-dom";
 function App() {
 	return (
@@ -18,9 +17,6 @@ function App() {
 				<Route
 					path='/register'
 					element={<Register />}></Route>
-				<Route
-					path='/hometools'
-					element={<Hometools />}></Route>
 			</Routes>
 		</>
 	);

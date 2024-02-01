@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { cursor, useTypewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
+import Nav from "./Nav";
 
 export const Home = () => {
 	const github = () => {
@@ -22,6 +23,7 @@ export const Home = () => {
 	});
 	return (
 		<HomeStyled>
+			<Nav></Nav>
 			<div className='home'>
 				<div className='content'>
 					<div className='left'>
