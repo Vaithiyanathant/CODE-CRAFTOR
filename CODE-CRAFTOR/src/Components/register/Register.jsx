@@ -1,8 +1,29 @@
 /** @format */
+
 import { Link } from "react-router-dom";
 import loginimage from "../../assets/login.jpeg";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useState } from "react";
+import { auth } from "../../firebase/firebaseconfig";
 
 export const Register = () => {
+	const [registerEmail, setRegisterEmail] = useState("");
+	const [registerPassword, setRegisterPassword] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+
+	const register = async () => {
+		try {
+			const user = await createUserWithEmailAndPassword(
+				auth,
+				registerEmail,
+				registerPassword
+			);
+			console.log(user);
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	return (
 		<>
 			<section className='regcon min-h-screen flex items-center justify-center '>
@@ -31,26 +52,39 @@ export const Register = () => {
 								type='text'
 								name='email'
 								placeholder='Your email'
+								value={registerEmail}
+								onChange={(event) => setRegisterEmail(event.target.value)}
 							/>
 							<div className='relative flex items-center'>
 								<input
 									className='p-2 mt-2 rounded-xl border w-full'
-									type='password'
+									type={showPassword ? "text" : "password"}
 									name='password'
 									placeholder='Your password'
+									value={registerPassword}
+									onChange={(event) => setRegisterPassword(event.target.value)}
 								/>
 								<svg
-									className='bi bi-eye-fill absolute right-4 top-5'
+									className='bi bi-eye-fill absolute right-4 top-5 cursor-pointer'
 									xmlns='http://www.w3.org/2000/svg'
 									width='16'
 									height='16'
 									fill='gray'
-									viewBox='0 0 16 16'>
-									<path d='M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z' />
-									<path d='M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z' />
+									viewBox='0 0 16 16'
+									onClick={() => setShowPassword(!showPassword)}>
+									<path
+										fillRule='evenodd'
+										d='M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z'
+									/>
+									<path
+										fillRule='evenodd'
+										d='M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z'
+									/>
 								</svg>
 							</div>
-							<button className='Login-button rounded-xl text-white py-2 mt-2'>
+							<button
+								className='Login-button rounded-xl text-white py-2 mt-2'
+								onClick={register}>
 								Register
 							</button>
 						</form>
@@ -68,7 +102,7 @@ export const Register = () => {
 								</a>
 							</p>
 							<Link to='/login'>
-								<button className='py-2 px-5 bg-white text-black  border rounded-xl'>
+								<button className='py-2 px-5 bg-white text-black border rounded-xl'>
 									Login
 								</button>
 							</Link>
@@ -79,3 +113,5 @@ export const Register = () => {
 		</>
 	);
 };
+
+export default Register;

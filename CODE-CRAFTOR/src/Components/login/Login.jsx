@@ -1,7 +1,36 @@
 /** @format */
 import { Link } from "react-router-dom";
 import loginimage from "../../assets/login.jpeg";
+import { useState } from "react";
+import {
+	onAuthStateChanged,
+	signOut,
+	signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebaseconfig";
+import { signInWithGoogle } from "../../firebase/firebaseconfig";
 export const Login = () => {
+	const [loginemail, setloginemail] = useState("");
+	const [loginpassword, setloginpassword] = useState("");
+	const [user, setuser] = useState("");
+
+	const login = async () => {
+		try {
+			const user = await signInWithEmailAndPassword(
+				auth,
+				loginemail,
+				loginpassword
+			);
+			console.log("login successful");
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
+	const logout = async () => {
+		await signOut(auth);
+	};
+
 	return (
 		<>
 			<section className='logcon min-h-screen flex items-center justify-center'>
@@ -25,6 +54,9 @@ export const Login = () => {
 								type='text'
 								name='email'
 								placeholder='Your email'
+								onChange={(event) => {
+									setloginemail(event.target.value);
+								}}
 							/>
 							<div className='relative'>
 								<input
@@ -32,6 +64,9 @@ export const Login = () => {
 									type='password'
 									name='password'
 									placeholder='Your password'
+									onChange={(event) => {
+										setloginpassword(event.target.value);
+									}}
 								/>
 
 								{/* SVG Eye */}
@@ -47,7 +82,9 @@ export const Login = () => {
 								</svg>
 							</div>
 
-							<button className='Login-button rounded-xl text-white py-2 mt-2'>
+							<button
+								className='Login-button rounded-xl text-white py-2 mt-2'
+								onClick={login}>
 								Login
 							</button>
 						</form>
@@ -58,7 +95,9 @@ export const Login = () => {
 							<hr className='border-gray-400' />
 						</div>
 
-						<button className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center text-sm'>
+						<button
+							onClick={signInWithGoogle}
+							className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center text-sm'>
 							<img
 								className='w-6 mr-3'
 								src='./img/google_logo_icon.png'
