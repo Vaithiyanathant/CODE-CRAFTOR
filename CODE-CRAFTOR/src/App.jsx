@@ -3,28 +3,30 @@
 import { Login } from "./Components/login/Login";
 import { Register } from "./Components/register/Register";
 import { Home } from "./Components/home/Home";
-import { Routes, Route } from "react-router-dom";
-import { Compiler } from "./Components/Compiler/Compiler";
-import {Hometools} from "./Components/Home/Hometools";
+import { Routes, Route, Navigate } from "react-router-dom";
 function App() {
+	const currentUser = false;
+
+	const RequireAuth = ({ children }) => {
+		return currentUser ? children : <Navigate to='/login' />;
+	};
+
 	return (
 		<>
 			<Routes>
 				<Route
-					path='/compiler'
-					element={<Compiler></Compiler>}></Route>
-				<Route
 					path='/'
-					element={<Home />}></Route>
+					element={
+						<RequireAuth>
+							<Home />
+						</RequireAuth>
+					}></Route>
 				<Route
 					path='/login'
 					element={<Login />}></Route>
 				<Route
 					path='/register'
 					element={<Register />}></Route>
-				<Route
-					path='/hometools'
-					element={<Hometools/>}></Route>
 			</Routes>
 		</>
 	);

@@ -2,33 +2,52 @@
 import { Link } from "react-router-dom";
 import loginimage from "../../assets/login.jpeg";
 import { useState } from "react";
-import {
-	onAuthStateChanged,
-	signOut,
-	signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseconfig";
-import { signInWithGoogle } from "../../firebase/firebaseconfig";
-export const Login = () => {
-	const [loginemail, setloginemail] = useState("");
-	const [loginpassword, setloginpassword] = useState("");
-	const [user, setuser] = useState("");
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-	const login = async () => {
-		try {
-			const user = await signInWithEmailAndPassword(
-				auth,
-				loginemail,
-				loginpassword
-			);
-			console.log("login successful");
-		} catch (error) {
-			console.log(error.message);
-		}
+export const Login = () => {
+	const [error, seterror] = useState(false);
+	const [email, setemail] = useState("");
+	const [password, setpassword] = useState("");
+
+	const provider = new GoogleAuthProvider();
+
+	const Navigate = useNavigate();
+
+	const handlelogin = (e) => {
+		e.preventDefault();
+		signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				console.log(user);
+				Navigate("/hometools");
+				// ...
+			})
+			.catch((error) => {
+				seterror(true);
+			});
 	};
 
 	const logout = async () => {
 		await signOut(auth);
+	};
+	const signInWithGoogle = () => {
+		signInWithPopup(auth, provider)
+			.then((result) => {
+				const name = result.user.displayName;
+				const email = result.user.email;
+				const profile = result.user.photoURL;
+
+				localStorage.setItem("name", name);
+				localStorage.setItem("email", email);
+				localStorage.setItem("profile", profile);
+				Navigate("/hometools");
+			})
+			.catch((error) => {
+				console.log(error);
+			});
 	};
 
 	return (
@@ -47,6 +66,7 @@ export const Login = () => {
 
 						{/* Data entry group */}
 						<form
+							onSubmit={handlelogin}
 							className='flex flex-col gap-4'
 							action=''>
 							<input
@@ -54,9 +74,7 @@ export const Login = () => {
 								type='text'
 								name='email'
 								placeholder='Your email'
-								onChange={(event) => {
-									setloginemail(event.target.value);
-								}}
+								onChange={(e) => setemail(e.target.value)}
 							/>
 							<div className='relative'>
 								<input
@@ -64,9 +82,7 @@ export const Login = () => {
 									type='password'
 									name='password'
 									placeholder='Your password'
-									onChange={(event) => {
-										setloginpassword(event.target.value);
-									}}
+									onChange={(e) => setpassword(e.target.value)}
 								/>
 
 								{/* SVG Eye */}
@@ -84,7 +100,7 @@ export const Login = () => {
 
 							<button
 								className='Login-button rounded-xl text-white py-2 mt-2'
-								onClick={login}>
+								type='submit'>
 								Login
 							</button>
 						</form>

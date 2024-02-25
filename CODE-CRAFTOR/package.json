@@ -12,6 +12,9 @@
   "dependencies": {
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@uiw/react-codemirror": "^4.21.21",
+    "ace-builds": "^1.32.6",
+    "axios": "^1.6.7",
     "firebase": "^10.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
