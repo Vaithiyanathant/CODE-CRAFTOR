@@ -22,7 +22,7 @@ export const Login = () => {
 			.then((userCredential) => {
 				const user = userCredential.user;
 				console.log(user);
-				Navigate("/hometools");
+				Navigate("/");
 				// ...
 			})
 			.catch((error) => {
@@ -43,7 +43,7 @@ export const Login = () => {
 				localStorage.setItem("name", name);
 				localStorage.setItem("email", email);
 				localStorage.setItem("profile", profile);
-				Navigate("/hometools");
+				Navigate("/home");
 			})
 			.catch((error) => {
 				console.log(error);
@@ -119,7 +119,7 @@ export const Login = () => {
 								src='./img/google_logo_icon.png'
 								alt=''
 							/>
-							Login width Google
+							Login with Google
 						</button>
 
 						<p className='mt-5 text-xs border-b border-gray-400 py-4'>
