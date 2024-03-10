@@ -12,10 +12,8 @@ const CodeEditorWindow = ({
 	theme,
 	outputDetails,
 }) => {
-	const userEmail = auth.currentUser.email;
-	const emailName = userEmail.substring(0, userEmail.indexOf("@"));
 	const [value, setValue] = useState(code || "");
-	const usercollection = collection(db, emailName);
+	const usercollection = collection(db, "user");
 
 	const [editorData, setEditorData] = useState({
 		code: code || "",
@@ -38,9 +36,9 @@ const CodeEditorWindow = ({
 		});
 		onChange("code", value);
 		console.log(editorData);
-		console.log(emailName);
 	};
 
+	
 	const handleSaveToFirestore = async () => {
 		try {
 			await addDoc(usercollection, {
