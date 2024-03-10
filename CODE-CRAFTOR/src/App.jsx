@@ -1,36 +1,43 @@
 /** @format */
-
+import "./App.css";
 import { Login } from "./Components/login/Login";
 import { Register } from "./Components/register/Register";
 import { Home } from "./Components/home/Home";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import Landing from "./Components/Landing";
+import { UserAuthContextProvider } from "./context/UserAuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute";
+import { Historylog } from "./Components/Historylog";
 function App() {
-	const currentUser = false;
-
-	const RequireAuth = ({ children }) => {
-		return currentUser ? children : <Navigate to='/login' />;
-	};
-
 	return (
 		<>
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<RequireAuth>
-							<Home />
-						</RequireAuth>
-					}></Route>
-				<Route
-					path='/login'
-					element={<Login />}></Route>
-				<Route
-					path='/register'
-					element={<Register />}></Route>
-				<Route
-					path='/home'
-					element={<Home />}></Route>
-			</Routes>
+			<UserAuthContextProvider>
+				<Routes>
+					<Route
+						path='/log'
+						element={<Historylog/>}></Route>
+
+					<Route
+						path='/login'
+						element={<Login />}></Route>
+					<Route
+						path='/'
+						element={<Home />}></Route>
+					<Route
+						path='/register'
+						element={<Register />}></Route>
+					<Route
+						path='/home'
+						element={<Home />}></Route>
+					<Route
+						path='/compiler'
+						element={
+							<ProtectedRoute>
+								<Landing />
+							</ProtectedRoute>
+						}></Route>
+				</Routes>
+			</UserAuthContextProvider>
 		</>
 	);
 }

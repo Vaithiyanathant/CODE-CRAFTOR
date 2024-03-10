@@ -3,6 +3,8 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 const navigation = [
 	{ name: "Dashboard", href: "#", current: true },
@@ -16,6 +18,18 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
+  const { logOut } = useUserAuth();
+
+  const navigate = useNavigate();
+	const handleLogout = async () => {
+		try {
+			await logOut();
+			navigate("/home");
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
+
 	return (
 		<Disclosure
 			as='nav'
@@ -136,8 +150,9 @@ export default function Nav() {
 														className={classNames(
 															active ? "bg-gray-100" : "",
 															"block px-4 py-2 text-sm text-gray-700"
-														)}>
-														Sign out
+														)}
+														onClick={handleLogout}>
+														Log out
 													</a>
 												)}
 											</Menu.Item>

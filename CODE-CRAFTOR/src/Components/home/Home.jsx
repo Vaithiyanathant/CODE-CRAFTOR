@@ -86,7 +86,7 @@ const HomeStyled = styled.div`
 	}
 	.home {
 		/* background: rgb(33, 38, 45); */
-		background: linear-gradient(0.65turn, #000, rgb(33, 38, 45), #000);
+		background: black;
 		height: 100vh;
 		overflow: auto;
 		display: flex;

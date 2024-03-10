@@ -1,7 +1,9 @@
 /** @format */
 import {  getAuth } from "firebase/auth";
-
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage"; 
 import { initializeApp } from "firebase/app";
+
 const firebaseConfig = {
 	apiKey: "AIzaSyCqa_Nmn5_J8YwtT6gT66_rnebDCm3ViU8",
 	authDomain: "code--craftor.firebaseapp.com",
@@ -15,6 +17,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+
 
 
  

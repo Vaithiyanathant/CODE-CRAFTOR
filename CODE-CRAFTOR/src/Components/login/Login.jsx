@@ -1,54 +1,38 @@
 /** @format */
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import loginimage from "../../assets/login.jpeg";
 import { useState } from "react";
-import { signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/firebaseconfig";
-import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 export const Login = () => {
-	const [error, seterror] = useState(false);
-	const [email, setemail] = useState("");
-	const [password, setpassword] = useState("");
+  const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [error, setError] = useState("");
+	const { logIn, googleSignIn } = useUserAuth();
+	const navigate = useNavigate();
 
-	const provider = new GoogleAuthProvider();
-
-	const Navigate = useNavigate();
-
-	const handlelogin = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		signInWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				const user = userCredential.user;
-				console.log(user);
-				Navigate("/");
-				// ...
-			})
-			.catch((error) => {
-				seterror(true);
-			});
+		setError("");
+		try {
+			await logIn(email, password);
+			navigate("/compiler");
+		} catch (err) {
+			setError(err.message);
+		}
+	};
+  const handleGoogleSignIn = async (e) => {
+		e.preventDefault();
+		try {
+			await googleSignIn();
+			navigate("/compiler");
+		} catch (error) {
+			console.log(error.message);
+		}
 	};
 
-	const logout = async () => {
-		await signOut(auth);
-	};
-	const signInWithGoogle = () => {
-		signInWithPopup(auth, provider)
-			.then((result) => {
-				const name = result.user.displayName;
-				const email = result.user.email;
-				const profile = result.user.photoURL;
-
-				localStorage.setItem("name", name);
-				localStorage.setItem("email", email);
-				localStorage.setItem("profile", profile);
-				Navigate("/home");
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	};
 
 	return (
 		<>
@@ -63,10 +47,11 @@ export const Login = () => {
 						<p className='text-sm mt-7 text-[white] text-opacity-70 text-center'>
 							If you're already a member, easily log in
 						</p>
+						{error && <h2 className='text-red'>{error}</h2>}
 
 						{/* Data entry group */}
 						<form
-							onSubmit={handlelogin}
+							onSubmit={handleSubmit}
 							className='flex flex-col gap-4'
 							action=''>
 							<input
@@ -74,7 +59,7 @@ export const Login = () => {
 								type='text'
 								name='email'
 								placeholder='Your email'
-								onChange={(e) => setemail(e.target.value)}
+								onChange={(e) => setEmail(e.target.value)}
 							/>
 							<div className='relative'>
 								<input
@@ -82,7 +67,7 @@ export const Login = () => {
 									type='password'
 									name='password'
 									placeholder='Your password'
-									onChange={(e) => setpassword(e.target.value)}
+									onChange={(e) => setPassword(e.target.value)}
 								/>
 
 								{/* SVG Eye */}
@@ -104,15 +89,13 @@ export const Login = () => {
 								Login
 							</button>
 						</form>
-
 						<div className='mt-10 grid grid-cols-3 items-center text-gray-400'>
 							<hr className='border-gray-400' />
 							<p className='text-center text-sm'>OR</p>
 							<hr className='border-gray-400' />
 						</div>
-
 						<button
-							onClick={signInWithGoogle}
+							onClick={handleGoogleSignIn}
 							className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center text-sm'>
 							<img
 								className='w-6 mr-3'
@@ -121,7 +104,6 @@ export const Login = () => {
 							/>
 							Login with Google
 						</button>
-
 						<p className='mt-5 text-xs border-b border-gray-400 py-4'>
 							<a
 								href=''
@@ -129,7 +111,6 @@ export const Login = () => {
 								Forgot Your password?
 							</a>
 						</p>
-
 						<div className='mt-3 text-xs flex justify-between items-cente'>
 							<p>
 								<a

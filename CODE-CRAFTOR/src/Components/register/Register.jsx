@@ -1,26 +1,27 @@
 /** @format */
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginimage from "../../assets/login.jpeg";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../../firebase/firebaseconfig";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 export const Register = () => {
-	const [registerEmail, setRegisterEmail] = useState("");
-	const [registerPassword, setRegisterPassword] = useState("");
-	const [showPassword, setShowPassword] = useState(false);
+	const [showPassword, setShowPassword] = useState(false); // State to track password visibility
 
-	const register = async () => {
+	const [email, setEmail] = useState("");
+	const [error, setError] = useState("");
+	const [password, setPassword] = useState("");
+	const { signUp } = useUserAuth();
+	let navigate = useNavigate();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setError("");
 		try {
-			const user = await createUserWithEmailAndPassword(
-				auth,
-				registerEmail,
-				registerPassword
-			);
-			console.log(user);
-		} catch (error) {
-			console.log(error.message);
+			await signUp(email, password);
+			navigate("/");
+		} catch (err) {
+			setError(err.message);
 		}
 	};
 
@@ -41,19 +42,19 @@ export const Register = () => {
 						<h2 className='font-bold text-2xl text-[white] text-center'>
 							Register
 						</h2>
-						<p className='text-sm mt-7 text-[white] text-opacity-70 text-center'>
+						<p className='text-sm mt-7 text-[#ebdede] text-opacity-70 text-center'>
 							If you don't have an account, create it now!
 						</p>
 						<form
 							className='flex flex-col gap-4'
-							action=''>
+							onSubmit={handleSubmit}>
+							{error && <h2 className='text-red'>{error}</h2>}
 							<input
 								className='p-2 mt-5 rounded-xl border'
 								type='text'
 								name='email'
 								placeholder='Your email'
-								value={registerEmail}
-								onChange={(event) => setRegisterEmail(event.target.value)}
+								onChange={(event) => setEmail(event.target.value)}
 							/>
 							<div className='relative flex items-center'>
 								<input
@@ -61,8 +62,7 @@ export const Register = () => {
 									type={showPassword ? "text" : "password"}
 									name='password'
 									placeholder='Your password'
-									value={registerPassword}
-									onChange={(event) => setRegisterPassword(event.target.value)}
+									onChange={(event) => setPassword(event.target.value)}
 								/>
 								<svg
 									className='bi bi-eye-fill absolute right-4 top-5 cursor-pointer'
@@ -84,7 +84,7 @@ export const Register = () => {
 							</div>
 							<button
 								className='Login-button rounded-xl text-white py-2 mt-2'
-								onClick={register}>
+								type='Submit'>
 								Register
 							</button>
 						</form>

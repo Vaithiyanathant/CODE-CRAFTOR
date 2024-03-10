@@ -1,0 +1,83 @@
+body{
+    margin: 0px 0px;
+    box-sizing: border-box;
+    background-color: #1b1c1c;
+}
+.inp,.out{
+    background-color: #1a2d37;
+}
+.Navbar{
+    background-color: #1a2d37;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border-bottom: 2px solid white;
+    border-top: 2px solid white;
+}
+.Navbar ul li{
+    list-style: none;
+    font-size: 2rem;
+    color: white;
+}
+
+Nav,Editor{
+    font-family: 'Abril Fatface', cursive;
+}
+
+.hout{
+    color: white;
+}
+
+.tc{
+    color: #1a2d37;
+}
+.ts{
+    font-size: 1.2rem;
+}
+.edit{
+    width: 65vw;
+}
+.outd{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .main{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 100px;
+    }
+    .edit,.inp,.out,.outd{
+        width: 80vw;
+    }
+    .edit{
+        height: 60vh;
+    }
+    .outd{
+        position: absolute;
+        left: 15%;
+    }
+    .drops{
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+    }
+    .hout{
+        margin-top: 20px;
+    }
+    .tc{
+        margin-top: 20px;
+        width: 60vw;
+    }
+  }
+  @media only screen and (max-width: 1207px) and (min-width: 768px){
+     .outd{
+        margin-left: 10%;        
+       height: 0px;
+     }
+  }
