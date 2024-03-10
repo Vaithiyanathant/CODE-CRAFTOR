@@ -7,16 +7,12 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "./Components/Landing";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import { Historylog } from "./Components/Historylog";
+import Historylog from "./Components/HistoryLog";
 function App() {
 	return (
 		<>
 			<UserAuthContextProvider>
 				<Routes>
-					<Route
-						path='/log'
-						element={<Historylog/>}></Route>
-
 					<Route
 						path='/login'
 						element={<Login />}></Route>
@@ -36,6 +32,9 @@ function App() {
 								<Landing />
 							</ProtectedRoute>
 						}></Route>
+					<Route
+						path='/history'
+						element={<Historylog />}></Route>
 				</Routes>
 			</UserAuthContextProvider>
 		</>
