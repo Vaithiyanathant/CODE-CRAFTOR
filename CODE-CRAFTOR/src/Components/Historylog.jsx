@@ -13,7 +13,7 @@ const HistoryLog = () => {
 		const fetchSafeModeLogs = async () => {
 			const safeModeCollectionRef = collection(
 				db,
-				`safesmode/${currentUserUid}`
+				`safemode/${currentUserUid}`
 			);
 			const safeModeSnapshot = await getDocs(safeModeCollectionRef);
 			const safeModeData = safeModeSnapshot.docs.map((doc) => ({
