@@ -10,8 +10,24 @@ import {
 	deleteDoc,
 	doc,
 } from "firebase/firestore";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import copy from "copy-to-clipboard";
+import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
+import "react-toastify/dist/ReactToastify.css";
 
 const CodePopup = ({ code, onClose }) => {
+	const [copied, setCopied] = useState(false);
+
+	const handleCopyCode = () => {
+		copy(code);
+		setCopied(true);
+		toast.success("Code copied to clipboard!"); // Show success toast when code is copied
+		setTimeout(() => {
+			setCopied(false);
+		}, 1500);
+	};
+
 	return (
 		<div className='fixed z-10 inset-0 overflow-y-auto'>
 			<div className='flex items-center justify-center min-h-screen'>
@@ -21,13 +37,29 @@ const CodePopup = ({ code, onClose }) => {
 				<div className='relative bg-white rounded-lg overflow-hidden max-w-lg'>
 					<div className='flex justify-between border-b border-gray-200 p-4'>
 						<h2 className='text-lg font-semibold'>Code</h2>
-						<button
-							className='text-gray-500 hover:text-gray-600'
-							onClick={onClose}>
-							Close
-						</button>
+						<div className='flex'>
+							<button
+								className='m-2 px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs rounded'
+								onClick={handleCopyCode}>
+								Copy
+							</button>
+							<button
+								className='text-gray-500 hover:text-gray-600 mr-2'
+								onClick={onClose}>
+								Close
+							</button>
+						</div>
 					</div>
-					<pre className='p-4 overflow-x-auto'>{code}</pre>
+
+					<div className='relative p-2 '>
+						<SyntaxHighlighter
+							language='javascript'
+							style={darcula}
+							className='p-2 overflow-x-auto rounded-lg'
+							showLineNumbers>
+							{code}
+						</SyntaxHighlighter>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -81,10 +113,10 @@ const HistoryLog = () => {
 	const calculateHoursAgo = (timestamp) => {
 		const currentTimestamp = new Date();
 		const diff = currentTimestamp - timestamp;
-		const hours = Math.floor(diff / (1000 * 60 * 60)); // Calculate difference in hours
+		const hours = Math.floor(diff / (1000 * 60 * 60));
 
 		if (hours === 0) {
-			const minutes = Math.floor(diff / (1000 * 60)); // Calculate difference in minutes
+			const minutes = Math.floor(diff / (1000 * 60));
 			return `${minutes} minutes ago`;
 		} else if (hours === 1) {
 			return "1 hour ago";
@@ -97,6 +129,7 @@ const HistoryLog = () => {
 		try {
 			await deleteDoc(doc(db, "log", logId));
 			setData(data.filter((item) => item.id !== logId));
+			toast.error("log deleted"); // Show success toast when code is copied
 		} catch (error) {
 			console.error("Error deleting log:", error);
 		}
@@ -104,6 +137,8 @@ const HistoryLog = () => {
 
 	return (
 		<div className='max-w-screen-lg mx-auto'>
+			<ToastContainer position='top-right' />{" "}
+			{/* Add ToastContainer for notifications */}
 			<h1 className='text-3xl font-bold mb-6'>History Log</h1>
 			<div>
 				{data.map((item, index) => (

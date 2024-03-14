@@ -11,6 +11,9 @@ import {
 	serverTimestamp,
 	getDoc,
 } from "firebase/firestore"; // Importing necessary Firestore functions
+import {toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
+import "react-toastify/dist/ReactToastify.css";
+
 
 const CodeEditorWindow = ({
 	onChange,
@@ -75,6 +78,8 @@ const CodeEditorWindow = ({
 				timestamp: serverTimestamp(),
 				uid: auth.currentUser.uid,
 			});
+			toast.success("Code Saved To Log!"); // Show success toast when code is copied
+
 			console.log("Editor data saved to Firestore successfully!");
 		} catch (error) {
 			console.error("Error saving editor data to Firestore: ", error);
