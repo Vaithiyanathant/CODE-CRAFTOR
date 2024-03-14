@@ -90,7 +90,7 @@ const CodeEditorWindow = ({
 	const saveCodeRealtime = async (code) => {
 		try {
 			const userDocRef = doc(db, "safemode", auth.currentUser.uid); // Reference to user document in safemode collection
-			await setDoc(userDocRef, { code }); // Set code in user document
+			await setDoc(userDocRef, { code, timestamp: serverTimestamp() }); // Set code in user document
 			console.log("Code saved in real-time to Firestore!");
 		} catch (error) {
 			console.error("Error saving code in real-time to Firestore: ", error);

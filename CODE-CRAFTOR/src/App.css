@@ -1,7 +1,7 @@
 body{
     margin: 0px 0px;
     box-sizing: border-box;
-    background-color: #1b1c1c;
+  /* background-color: #1b1c1c;*/
 }
 .inp,.out{
     background-color: #1a2d37;
