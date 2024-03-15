@@ -8,6 +8,7 @@ import Landing from "./Components/Landing";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Historylog from "./Components/HistoryLog";
+import  Safelog  from "./Components/Safelog";
 function App() {
 	return (
 		<>
@@ -35,6 +36,9 @@ function App() {
 					<Route
 						path='/history'
 						element={<Historylog />}></Route>
+					<Route
+						path='/safelog'
+						element={<Safelog/>}></Route>
 				</Routes>
 			</UserAuthContextProvider>
 		</>

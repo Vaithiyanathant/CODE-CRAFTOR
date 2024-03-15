@@ -27,7 +27,9 @@
     "react-simple-typewriter": "^5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^10.0.4",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "react-tsparticles": "^2.12.2",
+"tsparticles": "^2.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

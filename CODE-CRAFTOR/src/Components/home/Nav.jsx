@@ -8,8 +8,8 @@ import { useUserAuth } from "../../context/UserAuthContext";
 
 const navigation = [
 	{ name: "Dashboard", href: "#", current: true },
-	{ name: "Team", href: "#", current: false },
-	{ name: "Projects", href: "#", current: false },
+	{ name: "Historylog", href: "#", current: false },
+	{ name: "Safesavelog", href: "#", current: false },
 	{ name: "Calendar", href: "#", current: false },
 ];
 
