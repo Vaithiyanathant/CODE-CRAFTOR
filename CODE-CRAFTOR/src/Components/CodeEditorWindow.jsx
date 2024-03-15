@@ -1,5 +1,5 @@
 /** @format */
-
+import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { auth, db } from "../firebase/firebaseconfig";
@@ -115,15 +115,31 @@ const CodeEditorWindow = ({
 				onChange={handleEditorChange}
 			/>
 			<button
-				className='text-white bg-green-600'
+				className='text-white bg-green-600 px-4 py-2 rounded mr-2'
 				onClick={handleSaveToFirestore}>
 				Save
 			</button>
 			<button
-				className='text-white bg-blue-600'
+				className={`text-white px-4 py-2 rounded mr-2 ${
+					safeMode ? "bg-blue-600" : "bg-gray-600"
+				}`}
 				onClick={handleToggleSafeMode}>
 				{safeMode ? "Safe Mode: On" : "Safe Mode: Off"}
 			</button>
+			<Link
+				to='/history'
+				className='inline-block'>
+				<button className='text-white bg-orange-400 px-4 py-2 rounded mr-2'>
+					History Log
+				</button>
+			</Link>
+			<Link
+				to='/safelog'
+				className='inline-block'>
+				<button className='text-white bg-yellow-800 px-4 py-2 rounded'>
+					Safe Mode Log
+				</button>
+			</Link>
 		</div>
 	);
 };
