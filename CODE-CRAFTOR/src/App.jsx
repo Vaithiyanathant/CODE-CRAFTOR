@@ -7,8 +7,9 @@ import { Routes, Route } from "react-router-dom";
 import Landing from "./Components/Landing";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
-import Historylog from "./Components/HistoryLog";
-import  Safelog  from "./Components/Safelog";
+
+import Safelog from "./Components/Safelog";
+import HistoryLog from "./Components/Historylog";
 function App() {
 	return (
 		<>
@@ -35,10 +36,10 @@ function App() {
 						}></Route>
 					<Route
 						path='/history'
-						element={<Historylog />}></Route>
+						element={<HistoryLog />}></Route>
 					<Route
 						path='/safelog'
-						element={<Safelog/>}></Route>
+						element={<Safelog />}></Route>
 				</Routes>
 			</UserAuthContextProvider>
 		</>
