@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState, useEffect } from "react";
-import { db } from "../firebase/firebaseconfig";
+import { auth, db } from "../firebase/firebaseconfig";
 import {
 	collection,
 	getDocs,
@@ -9,6 +9,7 @@ import {
 	query,
 	deleteDoc,
 	doc,
+	where,
 } from "firebase/firestore";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -70,7 +71,58 @@ const HistoryLog = () => {
 	const [data, setData] = useState([]);
 	const [selectedCode, setSelectedCode] = useState(null);
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
+
+		useEffect(() => {
+			const fetchData = async (currentUserUid) => {
+				try {
+					const q = query(
+						collection(db, "log"),
+						where("uid", "==", currentUserUid),
+						orderBy("timestamp", "desc")
+					);
+					const querySnapshot = await getDocs(q);
+
+					const dataArray = [];
+					querySnapshot.forEach((doc) => {
+						const logData = doc.data();
+						const timestamp = new Date(logData.timestamp.seconds * 1000);
+						const formattedTimestamp = timestamp.toLocaleString();
+						const hoursAgo = calculateHoursAgo(timestamp);
+						dataArray.push({
+							id: doc.id,
+							...logData,
+							timestamp: formattedTimestamp,
+							hoursAgo,
+						});
+					});
+
+					setData(dataArray);
+					setLoading(false);
+				} catch (error) {
+					console.error("Error fetching data:", error);
+					setError(error.message);
+					setLoading(false);
+				}
+			};
+
+			const unsubscribe = auth.onAuthStateChanged((user) => {
+				if (user) {
+					const currentUserUid = user.uid;
+					fetchData(currentUserUid);
+				} else {
+					console.log("No user signed in.");
+					setLoading(false);
+					setError("No user signed in.");
+				}
+			});
+
+			return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
+		}, []);
+
+/*
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -100,7 +152,7 @@ const HistoryLog = () => {
 
 		fetchData();
 	}, []);
-
+*/
 	const handleCodeClick = (code) => {
 		setSelectedCode(code);
 		setIsPopupOpen(true);
@@ -134,6 +186,13 @@ const HistoryLog = () => {
 			console.error("Error deleting log:", error);
 		}
 	};
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
 
 	return (
 		<div className='max-w-screen-lg mx-auto'>
@@ -166,6 +225,7 @@ const HistoryLog = () => {
 						<p className='text-gray-600'>Memory: {item.editorData.memory}</p>
 						<p className='text-gray-600'>Time: {item.editorData.time}</p>
 						<p className='text-gray-600'>uid: {item.uid}</p>
+						<p className='text-gray-600'>Title: {item.title}</p>
 					</div>
 				))}
 			</div>

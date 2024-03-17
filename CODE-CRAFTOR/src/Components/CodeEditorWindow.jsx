@@ -11,9 +11,8 @@ import {
 	serverTimestamp,
 	getDoc,
 } from "firebase/firestore"; // Importing necessary Firestore functions
-import {toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
+import { toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import "react-toastify/dist/ReactToastify.css";
-
 
 const CodeEditorWindow = ({
 	onChange,
@@ -25,6 +24,7 @@ const CodeEditorWindow = ({
 	const [value, setValue] = useState(code || "");
 	const userCollection = collection(db, "log"); // Change collection name if necessary
 	const safeModeCollection = collection(db, "safemode"); // Change collection name if necessary
+	const [logName, setLogName] = useState(""); // State for log name
 
 	const [editorData, setEditorData] = useState({
 		code: code || "",
@@ -77,6 +77,7 @@ const CodeEditorWindow = ({
 				editorData,
 				timestamp: serverTimestamp(),
 				uid: auth.currentUser.uid,
+				title: logName,
 			});
 			toast.success("Code Saved To Log!"); // Show success toast when code is copied
 
@@ -95,7 +96,12 @@ const CodeEditorWindow = ({
 	const saveCodeRealtime = async (code) => {
 		try {
 			const userDocRef = doc(db, "safemode", auth.currentUser.uid); // Reference to user document in safemode collection
-			await setDoc(userDocRef, { code, timestamp: serverTimestamp() ,uid:auth.currentUser.uid}); // Set code in user document
+			await setDoc(userDocRef, {
+				code,
+				timestamp: serverTimestamp(),
+				uid: auth.currentUser.uid,
+				language: language || "javascript",
+			}); // Set code in user document
 			console.log("Code saved in real-time to Firestore!");
 		} catch (error) {
 			console.error("Error saving code in real-time to Firestore: ", error);
@@ -114,6 +120,14 @@ const CodeEditorWindow = ({
 				defaultValue='// some comment'
 				onChange={handleEditorChange}
 			/>
+			<input
+				type='text'
+				placeholder='Log Name'
+				className='p-2 m-2 border border-gray-300 rounded'
+				value={logName}
+				onChange={(e) => setLogName(e.target.value)} // Update logName state
+			/>
+
 			<button
 				className='text-white bg-green-600 px-4 py-2 rounded mr-2'
 				onClick={handleSaveToFirestore}>
