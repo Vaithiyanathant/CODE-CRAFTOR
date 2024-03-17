@@ -1,22 +1,25 @@
 /** @format */
 
-import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { db } from "../firebase/firebaseconfig";
+import { auth, db } from "../firebase/firebaseconfig";
 
 export const Safelog = () => {
 	const [safedata, setsafedata] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
 
 	useEffect(() => {
-		const fetchData = async () => {
+		const fetchData = async (currentUserUid) => {
 			try {
-				const dataArray = [];
 				const q = query(
 					collection(db, "safemode"),
+					where("uid", "==", currentUserUid),
 					orderBy("timestamp", "desc")
 				);
 				const querySnapshot = await getDocs(q);
 
+				const dataArray = [];
 				querySnapshot.forEach((doc) => {
 					const logData = doc.data();
 					const timestamp = new Date(logData.timestamp.seconds * 1000);
@@ -29,13 +32,28 @@ export const Safelog = () => {
 						hoursAgo,
 					});
 				});
+
 				setsafedata(dataArray);
+				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
+				setError(error.message);
+				setLoading(false);
 			}
 		};
 
-		fetchData();
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			if (user) {
+				const currentUserUid = user.uid;
+				fetchData(currentUserUid);
+			} else {
+				console.log("No user signed in.");
+				setLoading(false);
+				setError("No user signed in.");
+			}
+		});
+
+		return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
 	}, []);
 
 	const calculateHoursAgo = (timestamp) => {
@@ -52,6 +70,14 @@ export const Safelog = () => {
 			return `${hours} hours ago`;
 		}
 	};
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
+
+	if (error) {
+		return <div>Error: {error}</div>;
+	}
 
 	return (
 		<div className='container mx-auto mt-5'>
