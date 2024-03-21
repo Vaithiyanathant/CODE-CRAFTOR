@@ -1,13 +1,17 @@
 /** @format */
 
+import { useState, useEffect } from "react";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import copy from "copy-to-clipboard";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import { useEffect, useState } from "react";
 import { auth, db } from "../firebase/firebaseconfig";
 
 export const Safelog = () => {
 	const [safedata, setsafedata] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [copied, setCopied] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async (currentUserUid) => {
@@ -71,6 +75,12 @@ export const Safelog = () => {
 		}
 	};
 
+	const handleCopy = (code) => {
+		copy(code);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000); // Reset copied status after 2 seconds
+	};
+
 	if (loading) {
 		return <div>Loading...</div>;
 	}
@@ -91,7 +101,18 @@ export const Safelog = () => {
 							<div className='text-white'>
 								<p className='font-bold'>{item.title}</p>
 								<p className='text-sm'>{item.timestamp}</p>
-								<p className='text-sm'>{item.code}</p>
+								{/* Syntax highlighting */}
+								<SyntaxHighlighter
+									language='javascript'
+									style={darcula}>
+									{item.code}
+								</SyntaxHighlighter>
+								{/* Copy button */}
+								<button
+									className='text-sm bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700'
+									onClick={() => handleCopy(item.code)}>
+									{copied ? "Copied!" : "Copy"}
+								</button>
 								<p className='text-sm'>{item.uid}</p>
 							</div>
 							<div className='text-gray-500 mt-2 md:mt-0'>{item.hoursAgo}</div>
