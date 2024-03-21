@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseconfig";
@@ -104,7 +104,7 @@ export const Safelog = () => {
 								{/* Syntax highlighting */}
 								<SyntaxHighlighter
 									language='javascript'
-									style={darcula}>
+									style={atomDark}>
 									{item.code}
 								</SyntaxHighlighter>
 								{/* Copy button */}

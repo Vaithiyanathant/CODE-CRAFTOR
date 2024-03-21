@@ -12,7 +12,7 @@ import {
 	where,
 } from "firebase/firestore";
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
-import { darcula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import "react-toastify/dist/ReactToastify.css";
@@ -55,7 +55,7 @@ const CodePopup = ({ code, onClose }) => {
 					<div className='relative p-2 '>
 						<SyntaxHighlighter
 							language='javascript'
-							style={darcula}
+							style={atomDark}
 							className='p-2 overflow-x-auto rounded-lg'
 							showLineNumbers>
 							{code}
