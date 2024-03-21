@@ -35,7 +35,7 @@ const CodePopup = ({ code, onClose }) => {
 				<div
 					className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'
 					aria-hidden='true'></div>
-				<div className='relative bg-white rounded-lg overflow-hidden max-w-lg'>
+				<div className='relative bg-white rounded-lg overflow-hidden '>
 					<div className='flex justify-between border-b border-gray-200 p-4'>
 						<h2 className='text-lg font-semibold'>Code</h2>
 						<div className='flex'>
