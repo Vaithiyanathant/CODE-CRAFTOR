@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState("");
 	const { logIn, googleSignIn } = useUserAuth();
@@ -23,16 +23,17 @@ export const Login = () => {
 			setError(err.message);
 		}
 	};
-  const handleGoogleSignIn = async (e) => {
+	const handleGoogleSignIn = async (e) => {
 		e.preventDefault();
 		try {
 			await googleSignIn();
+			const url = auth.currentUser.loginimage;
+			localStorage.setItem("profileImage", url);
 			navigate("/compiler");
 		} catch (error) {
 			console.log(error.message);
 		}
 	};
-
 
 	return (
 		<>

@@ -18,12 +18,13 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const { logOut } = useUserAuth();
+	const { logOut } = useUserAuth();
 
-  const navigate = useNavigate();
+	const navigate = useNavigate();
 	const handleLogout = async () => {
 		try {
 			await logOut();
+			localStorage.clear();
 			navigate("/home");
 		} catch (error) {
 			console.log(error.message);
@@ -105,7 +106,7 @@ export default function Nav() {
 											<span className='sr-only'>Open user menu</span>
 											<img
 												className='h-8 w-8 rounded-full'
-												src={localStorage.getItem("profile")}
+												src={localStorage.getItem("profileImage")}
 												alt=''
 											/>
 										</Menu.Button>

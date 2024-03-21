@@ -74,55 +74,54 @@ const HistoryLog = () => {
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
 
+	useEffect(() => {
+		const fetchData = async (currentUserUid) => {
+			try {
+				const q = query(
+					collection(db, "log"),
+					where("uid", "==", currentUserUid),
+					orderBy("timestamp", "desc")
+				);
+				const querySnapshot = await getDocs(q);
 
-		useEffect(() => {
-			const fetchData = async (currentUserUid) => {
-				try {
-					const q = query(
-						collection(db, "log"),
-						where("uid", "==", currentUserUid),
-						orderBy("timestamp", "desc")
-					);
-					const querySnapshot = await getDocs(q);
-
-					const dataArray = [];
-					querySnapshot.forEach((doc) => {
-						const logData = doc.data();
-						const timestamp = new Date(logData.timestamp.seconds * 1000);
-						const formattedTimestamp = timestamp.toLocaleString();
-						const hoursAgo = calculateHoursAgo(timestamp);
-						dataArray.push({
-							id: doc.id,
-							...logData,
-							timestamp: formattedTimestamp,
-							hoursAgo,
-						});
+				const dataArray = [];
+				querySnapshot.forEach((doc) => {
+					const logData = doc.data();
+					const timestamp = new Date(logData.timestamp.seconds * 1000);
+					const formattedTimestamp = timestamp.toLocaleString();
+					const hoursAgo = calculateHoursAgo(timestamp);
+					dataArray.push({
+						id: doc.id,
+						...logData,
+						timestamp: formattedTimestamp,
+						hoursAgo,
 					});
+				});
 
-					setData(dataArray);
-					setLoading(false);
-				} catch (error) {
-					console.error("Error fetching data:", error);
-					setError(error.message);
-					setLoading(false);
-				}
-			};
+				setData(dataArray);
+				setLoading(false);
+			} catch (error) {
+				console.error("Error fetching data:", error);
+				setError(error.message);
+				setLoading(false);
+			}
+		};
 
-			const unsubscribe = auth.onAuthStateChanged((user) => {
-				if (user) {
-					const currentUserUid = user.uid;
-					fetchData(currentUserUid);
-				} else {
-					console.log("No user signed in.");
-					setLoading(false);
-					setError("No user signed in.");
-				}
-			});
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			if (user) {
+				const currentUserUid = user.uid;
+				fetchData(currentUserUid);
+			} else {
+				console.log("No user signed in.");
+				setLoading(false);
+				setError("No user signed in.");
+			}
+		});
 
-			return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
-		}, []);
+		return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
+	}, []);
 
-/*
+	/*
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -195,47 +194,115 @@ const HistoryLog = () => {
 	}
 
 	return (
-		<div className='max-w-screen-lg mx-auto'>
-			<ToastContainer position='top-right' />{" "}
-			{/* Add ToastContainer for notifications */}
-			<h1 className='text-3xl font-bold mb-6 text-white'>History Log</h1>
-			<div>
-				{data.map((item, index) => (
-					<div
-						key={index}
-						className='bg-gray-100 p-4 mb-4 rounded-md shadow-md'>
-						<h3 className='text-xl font-bold mb-2'>Log {index + 1}</h3>
-						<p className='text-gray-600 mb-2'>
-							Timestamp: {item.timestamp} ({item.hoursAgo})
-						</p>
-						<button
-							className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'
-							onClick={() => handleCodeClick(item.editorData.code)}>
-							Show Code
-						</button>
-						<button
-							className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-							onClick={() => handleDeleteLog(item.id)}>
-							Delete
-						</button>
-						<p className='text-gray-600'>Status: {item.editorData.status}</p>
-						<p className='text-gray-600'>
-							Language: {item.editorData.language}
-						</p>
-						<p className='text-gray-600'>Memory: {item.editorData.memory}</p>
-						<p className='text-gray-600'>Time: {item.editorData.time}</p>
-						<p className='text-gray-600'>uid: {item.uid}</p>
-						<p className='text-gray-600'>Title: {item.title}</p>
-					</div>
-				))}
+		<>
+			<div className='max-w-screen-lg mx-auto'>
+				<ToastContainer position='top-right' />{" "}
+				{/* Add ToastContainer for notifications */}
+				<h1 className='text-3xl font-bold  text-white p-5'>History Log</h1>
 			</div>
-			{isPopupOpen && (
-				<CodePopup
-					code={selectedCode}
-					onClose={handleClosePopup}
-				/>
-			)}
-		</div>
+			<div className="p-10">
+				<table className='min-w-full divide-y divide-gray-200'>
+					<thead className='bg-gray-50'>
+						<tr>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Date
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Timestamp
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Hours Ago
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Code
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Status
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Language
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Memory
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Time
+							</th>
+							<th
+								scope='col'
+								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
+								Actions
+							</th>
+						</tr>
+					</thead>
+					<tbody className='bg-white divide-y divide-gray-200'>
+						{data.map((item, index) => (
+							<tr
+								key={index}
+								className='bg-gray-100'>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.timestamp.split(",")[0]}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.timestamp.split(",")[1]}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.hoursAgo}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									<button
+										className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'
+										onClick={() => handleCodeClick(item.code)}>
+										Show Code
+									</button>
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.status}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.language}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.memory}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									{item.time}
+								</td>
+								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
+									<button
+										className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+										onClick={() => handleDeleteLog(item.id)}>
+										Delete
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				{isPopupOpen && (
+					<CodePopup
+						code={selectedCode}
+						onClose={handleClosePopup}
+					/>
+				)}
+			</div>
+		</>
 	);
 };
 

@@ -59,7 +59,7 @@ const Landing = () => {
 			headers: {
 				"content-type": "application/json",
 				"Content-Type": "application/json",
-				"X-RapidAPI-Key": "741b23ce23msh575ac8ac97f2173p14385ejsncc30b8463cf0",
+				"X-RapidAPI-Key": "8e004155bdmsh7e1745ef0ad80a2p12a799jsn62c5bbcd1042",
 				"X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
 			},
 			body: JSON.stringify({

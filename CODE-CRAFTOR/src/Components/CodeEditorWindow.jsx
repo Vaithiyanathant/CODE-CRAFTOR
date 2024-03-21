@@ -74,10 +74,14 @@ const CodeEditorWindow = ({
 	const handleSaveToFirestore = async () => {
 		try {
 			await addDoc(userCollection, {
-				editorData,
 				timestamp: serverTimestamp(),
 				uid: auth.currentUser.uid,
 				title: logName,
+				code: value,
+				language: language || "javascript",
+				status: outputDetails?.status?.description || "",
+				memory: outputDetails?.memory || "",
+				time: outputDetails?.time || "",
 			});
 			toast.success("Code Saved To Log!"); // Show success toast when code is copied
 
