@@ -1,9 +1,10 @@
 /** @format */
 
 import { Link, useNavigate } from "react-router-dom";
-import loginimage from "../../assets/login.jpeg";
 import { useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
+
+import li from "../../assets/loginback.png";
 
 export const Register = () => {
 	const [showPassword, setShowPassword] = useState(false); // State to track password visibility
@@ -30,11 +31,11 @@ export const Register = () => {
 			<section className='regcon min-h-screen flex items-center justify-center '>
 				<div className='bg-[#31363c] flex rounded-2xl shadow-lg max-w-3xl p-4'>
 					<div className='sm:block hidden w-1/2'>
-						<Link to='/'>
+						<Link to='/login'>
 							<img
 								className='sm:block hidden rounded-2xl'
 								alt='img-login'
-								src={loginimage}
+								src={li}
 							/>
 						</Link>
 					</div>

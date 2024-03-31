@@ -1,10 +1,10 @@
 /** @format */
 import { Link, Navigate } from "react-router-dom";
-import loginimage from "../../assets/login.jpeg";
 import { useState } from "react";
 import { auth } from "../../firebase/firebaseconfig";
 import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
+import registerimg from "../../assets/registerimg.png";
 
 export const Login = () => {
 	const [email, setEmail] = useState("");
@@ -134,11 +134,11 @@ export const Login = () => {
 
 					{/* Image */}
 					<div className='sm:block hidden w-1/2'>
-						<Link to='/'>
+						<Link to='/register'>
 							<img
 								className='sm:block hidden rounded-2xl'
 								alt='img-login'
-								src={loginimage}
+								src={registerimg}
 							/>
 						</Link>
 					</div>
