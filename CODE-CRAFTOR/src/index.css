@@ -4,9 +4,6 @@
 /*The @import rule is used to import an external CSS file containing font styles from the Google Fonts API "Poppins" family, specifying styles, weights and loading optimization.*/
 
 /* The selector (.Login-button) styles an HTML element with the class "Login-button" by applying a linear gradient background on the left side, with a color transition from "rebeccapurple" to "dodgerblue". */
-.Login-button {
-    background:black;
-}
 
 /* Hovering over the element triggers a visual effect of a linear gradient in the background, changing color, creating an effect when interacting with the button. */
 .Login-button:hover {
@@ -36,4 +33,3 @@ background: linear-gradient(0.65turn, rgb(0, 0, 0), rgb(33, 38, 45), rgb(0, 0, 0
 h1.cursor {
     color: #ffffff; 
 }
-

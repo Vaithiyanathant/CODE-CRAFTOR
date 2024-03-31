@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { cursor, useTypewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
-import Nav from "./Nav";
+import homelogo from "../../assets/logoforhome.png";
 
 export const Home = () => {
 	const github = () => {
@@ -23,8 +23,7 @@ export const Home = () => {
 	});
 	return (
 		<HomeStyled>
-			<Nav></Nav>
-			<div className='home'>
+			<div className='home logcon'>
 				<div className='content'>
 					<div className='left'>
 						<div className='text cursor'>
@@ -72,7 +71,10 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className='right'>
-						<img alt='logo' />
+						<img className="homelogo"
+							alt='logo'
+							src={homelogo}
+						/>
 					</div>
 				</div>
 			</div>

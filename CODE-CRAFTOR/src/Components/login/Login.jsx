@@ -18,6 +18,10 @@ export const Login = () => {
 		setError("");
 		try {
 			await logIn(email, password);
+			localStorage.setItem(
+				"profileImage",
+				"https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
+			);
 			navigate("/compiler");
 		} catch (err) {
 			setError(err.message);
@@ -27,7 +31,7 @@ export const Login = () => {
 		e.preventDefault();
 		try {
 			await googleSignIn();
-			const url = auth.currentUser.loginimage;
+			const url = auth.currentUser.photoURL;
 			localStorage.setItem("profileImage", url);
 			navigate("/compiler");
 		} catch (error) {

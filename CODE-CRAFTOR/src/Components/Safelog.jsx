@@ -6,6 +6,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseconfig";
+import Nav from "./home/Nav";
 
 export const Safelog = () => {
 	const [safedata, setsafedata] = useState([]);
@@ -90,37 +91,44 @@ export const Safelog = () => {
 	}
 
 	return (
-		<div className='container mx-auto mt-5'>
-			<h1 className='text-white text-2xl font-bold mb-3'>Safelog</h1>
-			<ul className='divide-y divide-gray-300'>
-				{safedata.map((item) => (
-					<li
-						key={item.id}
-						className='py-4'>
-						<div className='flex flex-col md:flex-row md:justify-between items-center'>
-							<div className='text-white'>
-								<p className='font-bold'>{item.title}</p>
-								<p className='text-sm'>{item.timestamp}</p>
-								{/* Syntax highlighting */}
-								<SyntaxHighlighter
-									language='javascript'
-									style={atomDark}>
-									{item.code}
-								</SyntaxHighlighter>
-								{/* Copy button */}
-								<button
-									className='text-sm bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700'
-									onClick={() => handleCopy(item.code)}>
-									{copied ? "Copied!" : "Copy"}
-								</button>
-								<p className='text-sm'>{item.uid}</p>
+		<>
+		<Nav></Nav>
+			<div className='container mx-auto mt-5'>
+				<h1 className='text-white text-2xl font-bold mb-3'>Safelog</h1>
+				<ul className='divide-y divide-gray-300'>
+					{safedata.map((item) => (
+						<li
+							key={item.id}
+							className='py-4'>
+							<div className='flex flex-col md:flex-row md:justify-between items-center'>
+								<div className='text-white'>
+									<div className='text-gray-500 mt-2 md:mt-0'>
+										{item.hoursAgo}
+									</div>
+									<p className='text-sm'>{item.uid}</p>
+
+									<p className='font-bold'>{item.title}</p>
+									<p className='text-sm'>{item.timestamp}</p>
+									{/* Syntax highlighting */}
+									{/* Copy button */}
+									<button
+										className='text-sm bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700'
+										onClick={() => handleCopy(item.code)}>
+										{copied ? "Copied!" : "Copy"}
+									</button>
+
+									<SyntaxHighlighter
+										language='javascript'
+										style={atomDark}>
+										{item.code}
+									</SyntaxHighlighter>
+								</div>
 							</div>
-							<div className='text-gray-500 mt-2 md:mt-0'>{item.hoursAgo}</div>
-						</div>
-					</li>
-				))}
-			</ul>
-		</div>
+						</li>
+					))}
+				</ul>
+			</div>
+		</>
 	);
 };
 
