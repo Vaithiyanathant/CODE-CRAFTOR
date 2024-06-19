@@ -33,20 +33,15 @@ export const Home = () => {
 							</h1>
 							<h3>tool for coders</h3>
 							<p>
-								Lorem ipsum dolor sit amet, consectetur adip Lorem ipsum dolor
-								sit amet, consectetur adip Lorem ipsum dolor sit amet,
-								consectetur adip Lorem ipsum dolor sit amet, consectetur adip
-								Lorem ipsum dolor sit amet, consectetur adip Lorem ipsum dolor
-								sit amet, consectetur adip Lorem ipsum dolor sit amet,
-								consectetur adip Lorem ipsum dolor sit amet, consectetur adip
-								Lorem ipsum dolor sit amet, consectetur adip Lorem ipsum dolor
-								sit amet, consectetur adip
+        <li><strong>Efficient and Secure Coding</strong>: Advanced online compiler supporting multiple languages.</li>
+        <li><strong>Safe Save Mode</strong>: Auto-saves work to prevent data loss.</li>
+        <li><strong>History Log</strong>: Tracks code changes and allows reversion to previous versions.</li>
+        <li><strong>Real-Time Collaboration</strong>: Shared coding sessions and integrated chat.</li>
+        <li><strong>User-Friendly Interface</strong>: Enhanced coding experience with syntax highlighting and debugging tools.</li>
+        <li><strong>Cloud Storage</strong>: Securely store projects and access them anytime.</li>
+        <li><strong>Ideal for Developers</strong>: Suitable for both individual developers and collaborative teams.</li>
+        <li><strong>Start Coding Today</strong>: Begin coding with CodeCraftor to elevate your development process!</li>
 							</p>
-							<ul>
-								<li> Lorem ipsum dolor sit amet, consectetur adip</li>
-								<li> Lorem ipsum dolor sit amet, consectetur adip</li>
-								<li> Lorem ipsum dolor sit amet, consectetur adip</li>
-							</ul>
 							<div className='btns'>
 								<Link
 									to='/register'
