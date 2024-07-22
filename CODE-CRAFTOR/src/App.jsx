@@ -10,6 +10,7 @@ import ProtectedRoute from "./Components/ProtectedRoute";
 
 import Safelog from "./Components/Safelog";
 import HistoryLog from "./Components/Historylog";
+import Profile from "./Components/Profile";
 function App() {
 	return (
 		<>
@@ -40,6 +41,9 @@ function App() {
 					<Route
 						path='/safelog'
 						element={<Safelog />}></Route>
+					<Route
+						path='/profile'
+						element={<Profile />}></Route>
 				</Routes>
 			</UserAuthContextProvider>
 		</>

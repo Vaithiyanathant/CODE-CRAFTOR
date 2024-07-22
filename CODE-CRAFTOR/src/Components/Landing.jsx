@@ -14,14 +14,18 @@ import OutputDetails from "./OutputDetails";
 import ThemeDropdown from "./ThemeDropdown";
 import LanguagesDropdown from "./LanguagesDropdown";
 import Nav from "./home/Nav";
+import { auth, db } from "../firebase/firebaseconfig";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const Landing = () => {
-	const [code, setCode] = useState();
+	const [code, setCode] = useState("");
 	const [customInput, setCustomInput] = useState("");
 	const [outputDetails, setOutputDetails] = useState(null);
 	const [processing, setProcessing] = useState(null);
 	const [theme, setTheme] = useState("cobalt");
 	const [language, setLanguage] = useState(languageOptions[0]);
+	const [logName, setLogName] = useState(""); // State for log name
+	const [safeMode, setSafeMode] = useState(false); // State to track safe mode
 
 	const enterPress = useKeyPress("Enter");
 	const ctrlPress = useKeyPress("Control");
@@ -38,6 +42,7 @@ const Landing = () => {
 			handleCompile();
 		}
 	}, [ctrlPress, enterPress]);
+
 	const onChange = (action, data) => {
 		switch (action) {
 			case "code": {
@@ -59,7 +64,7 @@ const Landing = () => {
 			headers: {
 				"content-type": "application/json",
 				"Content-Type": "application/json",
-				"X-RapidAPI-Key": "8e004155bdmsh7e1745ef0ad80a2p12a799jsn62c5bbcd1042",
+				"X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY,
 				"X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
 			},
 			body: JSON.stringify({
@@ -85,7 +90,7 @@ const Landing = () => {
 		const options = {
 			method: "GET",
 			headers: {
-				"X-RapidAPI-Key": "b8bd8f4accmshd7f7e2e5979aab3p1f148ajsn4914764d3488",
+				"X-RapidAPI-Key": import.meta.env.VITE_RAPIDAPI_KEY2,
 				"X-RapidAPI-Host": "judge0-ce.p.rapidapi.com",
 			},
 		};
@@ -122,6 +127,7 @@ const Landing = () => {
 			defineTheme(theme.value).then((_) => setTheme(theme));
 		}
 	}
+
 	useEffect(() => {
 		defineTheme("oceanic-next").then((_) =>
 			setTheme({ value: "oceanic-next", label: "Oceanic Next" })
@@ -139,6 +145,7 @@ const Landing = () => {
 			progress: undefined,
 		});
 	};
+
 	const showErrorToast = (msg, timer) => {
 		toast.error(msg || `Something went wrong! Please try again.`, {
 			position: "top-right",
@@ -151,9 +158,35 @@ const Landing = () => {
 		});
 	};
 
+	// Function to save editor data to Firestore
+	const handleSaveToFirestore = async () => {
+		try {
+			await addDoc(collection(db, "log"), {
+				timestamp: serverTimestamp(),
+				uid: auth.currentUser.uid,
+				title: logName,
+				code: code,
+				language: language.value,
+				status: outputDetails?.status?.description || "",
+				memory: outputDetails?.memory || "",
+				time: outputDetails?.time || "",
+			});
+			toast.success("Code Saved To Log!"); // Show success toast when code is copied
+
+			console.log("Editor data saved to Firestore successfully!");
+		} catch (error) {
+			console.error("Error saving editor data to Firestore: ", error);
+		}
+	};
+
+	// Function to toggle safe mode
+	const handleToggleSafeMode = () => {
+		setSafeMode((prevMode) => !prevMode); // Toggle safe mode state
+	};
+
 	return (
 		<>
-			<Nav></Nav>
+			<Nav />
 			<ToastContainer
 				position='top-right'
 				autoClose={2000}
@@ -165,8 +198,8 @@ const Landing = () => {
 				draggable
 				pauseOnHover
 			/>
-			<div className='drops flex flex-row'>
-				<div className='px-4 py-2'>
+			<div className='flex flex-row flex-wrap px-4 py-2 space-x-4'>
+				<div className='px- py-2'>
 					<LanguagesDropdown onSelectChange={onSelectChange} />
 				</div>
 				<div className='px-4 py-2'>
@@ -176,19 +209,17 @@ const Landing = () => {
 					/>
 				</div>
 			</div>
-			<div className='main flex flex-row space-x-4 items-start px-4 py-4'>
-				<div className='edit flex flex-col justify-start items-end'>
+			<div className='main flex flex-col lg:flex-row space-x-4 items-start px-4 py-4'>
+				<div className='edit flex flex-col justify-start items-end w-full lg:w-2/3'>
 					<CodeEditorWindow
 						code={code}
 						onChange={onChange}
 						language={language?.value}
 						theme={theme.value}
-						input={customInput} // Pass customInput as input prop
-						outputDetails={outputDetails} // Pass outputDetails.stdout as output prop
+						outputDetails={outputDetails}
 					/>
 				</div>
-
-				<div className='flex flex-shrink-0 w-[30%] flex-col'>
+				<div className='flex flex-shrink-0 w-full lg:w-1/3 flex-col'>
 					<OutputWindow outputDetails={outputDetails} />
 					<div className='flex flex-col items-center my-5'>
 						<CustomInput
@@ -215,4 +246,5 @@ const Landing = () => {
 		</>
 	);
 };
+
 export default Landing;

@@ -16,6 +16,7 @@
     "@uiw/react-codemirror": "^4.21.21",
     "ace-builds": "^1.32.6",
     "axios": "^1.6.7",
+    "dotenv": "^16.4.5",
     "firebase": "^10.8.0",
     "monaco-themes": "^0.4.4",
     "react": "^18.2.0",
@@ -27,9 +28,9 @@
     "react-simple-typewriter": "^5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^10.0.4",
-    "styled-components": "^6.1.8",
     "react-tsparticles": "^2.12.2",
-"tsparticles": "^2.12.0"
+    "styled-components": "^6.1.8",
+    "tsparticles": "^2.12.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
