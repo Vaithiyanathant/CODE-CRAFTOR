@@ -1,6 +1,10 @@
 # CodeCraftor
 
-Welcome to **CodeCraftor** – an advanced online compiler designed for efficiency, security, and collaboration. Start coding today and elevate your development process!
+Welcome to **CodeCraftor** – an advanced online compiler designed for efficiency, security, and collaboration. Start coding today and elevate your Coding process!
+## 🚀 Start Coding Today
+
+Begin coding with CodeCraftor to elevate your development process! [Click here !!](https://code-craftor.vercel.app)
+
 
 ![CodeCraftor Banner](https://drive.google.com/uc?export=view&id=1UXEO4YntNjnLWNn6FdFOVOBL4Km1GhXB)
 
@@ -9,14 +13,9 @@ Welcome to **CodeCraftor** – an advanced online compiler designed for efficien
 - 🚀 **Efficient and Secure Coding**: Supports multiple programming languages for versatile coding needs. Whether you are working with Python, JavaScript, Java, C++, or any other popular language, CodeCraftor has you covered.
 - 💾 **Safe Save Mode**: Auto-saves your work to prevent data loss. Never worry about losing your progress due to unexpected shutdowns or crashes.
 - 🕒 **History Log**: Tracks code changes and allows reversion to previous versions. Easily review and restore earlier versions of your code to ensure you never lose important iterations.
-- 🤝 **Real-Time Collaboration**: Shared coding sessions and integrated chat for seamless teamwork. Collaborate with your team in real-time, no matter where they are located.
 - 🎨 **User-Friendly Interface**: Enhanced coding experience with syntax highlighting and debugging tools. Enjoy an intuitive and distraction-free coding environment designed to boost your productivity.
 - ☁️ **Cloud Storage**: Securely store your projects and access them anytime. Your code is safe in the cloud, making it accessible from any device at any time.
 - 👨‍💻 **Ideal for Developers**: Suitable for both individual developers and collaborative teams. Whether you're a solo developer or part of a larger team, CodeCraftor is designed to meet your needs.
-
-## 🚀 Start Coding Today
-
-Begin coding with CodeCraftor to elevate your development process! [Click here !!](https://code-craftor.vercel.app)
 
 ## 🛠️ Tech Stack
 
@@ -86,9 +85,16 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/codecraftor.git
+```
+```bash
 cd codecraftor
+```
+```bash
 npm install
+```
+```bash
 npm run dev
 ```
+
 
 
