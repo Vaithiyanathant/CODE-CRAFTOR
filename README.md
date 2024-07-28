@@ -101,19 +101,19 @@ I welcome and appreciate your contributions to CodeCraftor! Whether you're fixin
    ```bash
    git checkout -b feature-or-bugfix-name
    ```
-4.**Make Changes: Make your changes in your local repository.Ensure your code adheres to the project's coding standards and passes all tests.**
+4. **Make Changes: Make your changes in your local repository.Ensure your code adheres to the project's coding standards and passes all tests.**
 
-5.**Commit Changes: Commit your changes with a meaningful commit message:**
+5. **Commit Changes: Commit your changes with a meaningful commit message:**
 
    ```bash
    git commit -m "Description of the changes made"
    ```
-6.**Push Changes: Push your changes to your forked repository:**
+6. **Push Changes: Push your changes to your forked repository:**
    ```bash
    git push origin feature-or-bugfix-name
    ```
 
-7.**Create a Pull Request: Go to the original repository on GitHub and create a pull request from your forked repository. Provide a clear and detailed description of the changes you have made and the problem it solves or the feature it adds**
+7. **Create a Pull Request: Go to the original repository on GitHub and create a pull request from your forked repository. Provide a clear and detailed description of the changes you have made and the problem it solves or the feature it adds**
 
 
 ## Feedback and Suggestions
