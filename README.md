@@ -85,4 +85,39 @@ npm run dev
 ```
 
 
+## 🤝 Contributing
+
+We welcome and appreciate your contributions to CodeCraftor! Whether you're fixing bugs, adding new features, improving documentation, or enhancing the overall user experience, your input is valuable.
+
+### How to Contribute
+
+1. **Fork the Repository**: Click on the "Fork" button at the top right corner of the repository page to create a copy of the repository on your GitHub account.
+
+2. **Clone the Repository**: Clone the forked repository to your local machine using:
+   ```bash
+   git clone https://github.com/your-username/codecraftor.git
+   ```
+3. **Create a Branch: Create a new branch for your feature or bug fix**
+```bash
+git checkout -b feature-or-bugfix-name
+```
+4.**Make Changes: Make your changes in your local repository. Ensure your code adheres to the project's coding standards and passes all tests.**
+5.**Commit Changes: Commit your changes with a meaningful commit message:**
+```bash git commit -m "Description of the changes made"
+```
+6.**Push Changes: Push your changes to your forked repository:**
+```bash git push origin feature-or-bugfix-name
+```
+7.**Create a Pull Request: Go to the original repository on GitHub and create a pull request from your forked repository. Provide a clear and detailed description of the changes you have made and the problem it solves or the feature it adds**
+
+## Feedback and Suggestions
+
+If you have any feedback or suggestions to improve CodeCraftor, feel free to open an issue or start a discussion. We value your input and are always looking to improve the project. You can also send your feedback or suggestions via email to [vaithiayanathan30@gmail.com](mailto:vaithiayanathan30@gmail.com).
+
+Thank you for contributing to CodeCraftor and helping us create a better tool for the community!
+
+
+
+
+
 
