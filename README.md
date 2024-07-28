@@ -87,7 +87,7 @@ npm run dev
 
 ## 🤝 Contributing
 
-We welcome and appreciate your contributions to CodeCraftor! Whether you're fixing bugs, adding new features, improving documentation, or enhancing the overall user experience, your input is valuable.
+I welcome and appreciate your contributions to CodeCraftor! Whether you're fixing bugs, adding new features, improving documentation, or enhancing the overall user experience, your input is valuable.
 
 ### How to Contribute
 
@@ -98,17 +98,23 @@ We welcome and appreciate your contributions to CodeCraftor! Whether you're fixi
    git clone https://github.com/your-username/codecraftor.git
    ```
 3. **Create a Branch: Create a new branch for your feature or bug fix**
-```bash
-git checkout -b feature-or-bugfix-name
-```
-4.**Make Changes: Make your changes in your local repository. Ensure your code adheres to the project's coding standards and passes all tests.**
+   ```bash
+   git checkout -b feature-or-bugfix-name
+   ```
+4.**Make Changes: Make your changes in your local repository.Ensure your code adheres to the project's coding standards and passes all tests.**
+
 5.**Commit Changes: Commit your changes with a meaningful commit message:**
-```bash git commit -m "Description of the changes made"
-```
+
+   ```bash
+   git commit -m "Description of the changes made"
+   ```
 6.**Push Changes: Push your changes to your forked repository:**
-```bash git push origin feature-or-bugfix-name
-```
+   ```bash
+   git push origin feature-or-bugfix-name
+   ```
+
 7.**Create a Pull Request: Go to the original repository on GitHub and create a pull request from your forked repository. Provide a clear and detailed description of the changes you have made and the problem it solves or the feature it adds**
+
 
 ## Feedback and Suggestions
 
