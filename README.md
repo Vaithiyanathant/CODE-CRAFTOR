@@ -17,15 +17,48 @@ Begin coding with CodeCraftor to elevate your development process! [Click here !
 - ☁️ **Cloud Storage**: Securely store your projects and access them anytime. Your code is safe in the cloud, making it accessible from any device at any time.
 - 👨‍💻 **Ideal for Developers**: Suitable for both individual developers and collaborative teams. Whether you're a solo developer or part of a larger team, CodeCraftor is designed to meet your needs.
 
+
 ## 🛠️ Tech Stack
 
 CodeCraftor is built using the following technologies:
+<div style="display: flex; align-items: flex-start; align: center">
+  <table align="center">
+    <tr>
+      <td align="center" width="96">
+        <img src="https://techstack-generator.vercel.app/react-icon.svg" alt="React" width="65" height="65" />
+        <br>React
+      </td>
+      <td align="center" width="96">
+        <img src="https://skillicons.dev/icons?i=tailwind" width="65" height="65" alt="Tailwind CSS" />
+        <br>Tailwind CSS
+      </td>
+      <td align="center" width="96">
+        <img src="https://skillicons.dev/icons?i=firebase" width="65" height="65" alt="Firebase" />
+        <br>Firebase
+      </td>
+      <td align="center" width="96">
+        <img src="https://skillicons.dev/icons?i=vercel" width="65" height="65" alt="Vercel" />
+        <br>Vercel
+      </td>
+      <td align="center" width="96">
+        <img src="https://skillicons.dev/icons?i=vite" width="65" height="65" alt="Vite" />
+        <br>Vite
+      </td>
+      <td align="center" width="96">
+        <img src="https://techstack-generator.vercel.app/js-icon.svg" alt="JavaScript" width="65" height="65" />
+        <br>JavaScript
+      </td>
+    </tr>
+  </table>
+  <br><br>
+</div>
 
 - **React**: For building the user interface. React's component-based architecture allows for a modular and maintainable codebase.
 - **Tailwind CSS**: For styling and responsive design. Tailwind's utility-first approach makes it easy to create beautiful and responsive designs.
 - **Firebase**: For backend services including authentication, database, and hosting. Firebase provides a robust and scalable backend solution with real-time capabilities.
 - **Vercel**: For deployment and hosting. Vercel ensures fast and reliable deployments with excellent performance.
 - **Vite**: For fast and efficient development. Vite's blazing fast build tool offers a smooth development experience with minimal configuration.
+- **JavaScript**: As the primary programming language for web development, enabling dynamic interactions on the website.
 
 ## 📸 Screenshots
 
