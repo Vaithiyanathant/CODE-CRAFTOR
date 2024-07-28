@@ -70,18 +70,6 @@ Ensure you have the following installed:
 ### Installation
 
 Clone the repository:
-## 📝 Getting Started
-
-### Prerequisites
-
-Ensure you have the following installed:
-
-- Node.js
-- npm (Node Package Manager)
-
-### Installation
-
-Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/codecraftor.git
