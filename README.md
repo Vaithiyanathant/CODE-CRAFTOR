@@ -30,12 +30,12 @@ CodeCraftor is built using the following technologies:
 
 ### Login and Register
 
-![Login Page](path-to-your-login-image)
-![Register Page](path-to-your-register-image)
+![Login Page](https://drive.google.com/file/d/1GTrwnigBZC8Omg7EpAzsrYigJTKLQqtU/view?usp=sharing)
+![Register Page](https://drive.google.com/file/d/1HYKF2DAw-iU9H7fR94bFKxWA0mwMjPU3/view?usp=sharing)
 
 ### Compiler Page
 
-![Compiler Page](path-to-your-compiler-image)
+![Compiler Page](https://drive.google.com/file/d/1dVKU5OnE3EU1JGGPENoIFp-Gl4fneIOs/view?usp=drive_link)
 
 ### More Screenshots
 
