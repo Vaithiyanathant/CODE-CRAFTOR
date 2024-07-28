@@ -30,7 +30,7 @@ CodeCraftor is built using the following technologies:
       </td>
       <td align="center" width="96">
         <img src="https://skillicons.dev/icons?i=tailwind" width="65" height="65" alt="Tailwind CSS" />
-        <br>Tailwind CSS
+        <br>Tailwind
       </td>
       <td align="center" width="96">
         <img src="https://skillicons.dev/icons?i=firebase" width="65" height="65" alt="Firebase" />
