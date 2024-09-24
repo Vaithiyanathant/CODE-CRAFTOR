@@ -152,6 +152,8 @@ I welcome and appreciate your contributions to CodeCraftor! Whether you're fixin
 7. **Create a Pull Request: Go to the original repository on GitHub and create a pull request from your forked repository. Provide a clear and detailed description of the changes you have made and the problem it solves or the feature it adds**
 
 
+
+
 ## Feedback and Suggestions
 
 If you have any feedback or suggestions to improve CodeCraftor, feel free to open an issue or start a discussion. We value your input and are always looking to improve the project. You can also send your feedback or suggestions via email to [vaithiayanathan30@gmail.com](mailto:vaithiayanathan30@gmail.com).
