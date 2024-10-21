@@ -7,6 +7,7 @@ import copy from "copy-to-clipboard";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseconfig";
 import Nav from "./home/Nav";
+import ParticleBackground from "./Particle";
 
 export const Safelog = () => {
 	const [safedata, setsafedata] = useState([]);
@@ -92,7 +93,8 @@ export const Safelog = () => {
 
 	return (
 		<>
-		<Nav></Nav>
+			<ParticleBackground></ParticleBackground>
+			<Nav></Nav>
 			<div className='container mx-auto mt-5'>
 				<h1 className='text-white text-2xl font-bold mb-3'>Safelog</h1>
 				<ul className='divide-y divide-gray-300'>

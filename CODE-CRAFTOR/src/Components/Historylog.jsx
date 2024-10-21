@@ -16,6 +16,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
 import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
 import "react-toastify/dist/ReactToastify.css";
+import ParticleBackground from "./Particle";
 
 const CodePopup = ({ code, onClose }) => {
 	const [copied, setCopied] = useState(false);
@@ -195,12 +196,13 @@ const HistoryLog = () => {
 
 	return (
 		<>
+			<ParticleBackground />
 			<div className='max-w-screen-lg mx-auto'>
 				<ToastContainer position='top-right' />{" "}
 				{/* Add ToastContainer for notifications */}
 				<h1 className='text-3xl font-bold  text-white p-5'>History Log</h1>
 			</div>
-			<div className="p-10">
+			<div className='p-10'>
 				<table className='min-w-full divide-y divide-gray-200'>
 					<thead className='bg-gray-50'>
 						<tr>
