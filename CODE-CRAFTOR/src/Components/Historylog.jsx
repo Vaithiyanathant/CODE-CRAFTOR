@@ -1,5 +1,3 @@
-/** @format */
-
 import { useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseconfig";
 import {
@@ -14,7 +12,7 @@ import {
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
-import { ToastContainer, toast } from "react-toastify"; // Import ToastContainer and toast from react-toastify
+import { ToastContainer, toast } from "react-toastify"; 
 import "react-toastify/dist/ReactToastify.css";
 import ParticleBackground from "./Particle";
 
@@ -24,7 +22,7 @@ const CodePopup = ({ code, onClose }) => {
 	const handleCopyCode = () => {
 		copy(code);
 		setCopied(true);
-		toast.success("Code copied to clipboard!"); // Show success toast when code is copied
+		toast.success("Code copied to clipboard!");
 		setTimeout(() => {
 			setCopied(false);
 		}, 1500);
@@ -119,40 +117,9 @@ const HistoryLog = () => {
 			}
 		});
 
-		return () => unsubscribe(); // Cleanup function to unsubscribe from auth state changes
+		return () => unsubscribe(); 
 	}, []);
 
-	/*
-	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				const dataArray = [];
-				const q = query(collection(db, "log"), orderBy("timestamp", "desc"));
-				const querySnapshot = await getDocs(q);
-
-				querySnapshot.forEach((doc) => {
-					const logData = doc.data();
-					const timestamp = new Date(logData.timestamp.seconds * 1000);
-					const formattedTimestamp = timestamp.toLocaleString();
-					const hoursAgo = calculateHoursAgo(timestamp);
-
-					dataArray.push({
-						id: doc.id,
-						...logData,
-						timestamp: formattedTimestamp,
-						hoursAgo,
-					});
-				});
-
-				setData(dataArray);
-			} catch (error) {
-				console.error("Error fetching data:", error);
-			}
-		};
-
-		fetchData();
-	}, []);
-*/
 	const handleCodeClick = (code) => {
 		setSelectedCode(code);
 		setIsPopupOpen(true);
