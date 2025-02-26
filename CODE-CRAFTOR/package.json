@@ -17,6 +17,8 @@
     "ace-builds": "^1.32.6",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.2",
     "firebase": "^10.8.0",
     "monaco-themes": "^0.4.4",
     "react": "^18.2.0",
@@ -29,6 +31,7 @@
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^10.0.4",
     "react-tsparticles": "^2.12.2",
+    "recharts": "^2.15.1",
     "styled-components": "^6.1.8",
     "tsparticles": "^2.12.0"
   },

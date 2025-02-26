@@ -1,3 +1,5 @@
+/** @format */
+
 import { useState, useEffect } from "react";
 import { auth, db } from "../firebase/firebaseconfig";
 import {
@@ -12,9 +14,10 @@ import {
 import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import copy from "copy-to-clipboard";
-import { ToastContainer, toast } from "react-toastify"; 
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ParticleBackground from "./Particle";
+import Nav from "./home/Nav";
 
 const CodePopup = ({ code, onClose }) => {
 	const [copied, setCopied] = useState(false);
@@ -29,33 +32,40 @@ const CodePopup = ({ code, onClose }) => {
 	};
 
 	return (
-		<div className='fixed z-10 inset-0 overflow-y-auto'>
+		<div className='fixed z-10 inset-0 overflow-y-auto bg-[#020817] bg-opacity-80'>
 			<div className='flex items-center justify-center min-h-screen'>
+				{/* Background Overlay */}
 				<div
-					className='fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity'
+					className='fixed inset-0 bg-black bg-opacity-50 transition-opacity'
 					aria-hidden='true'></div>
-				<div className='relative bg-white rounded-lg overflow-hidden '>
-					<div className='flex justify-between border-b border-gray-200 p-4'>
-						<h2 className='text-lg font-semibold'>Code</h2>
+
+				{/* Popup Container */}
+				<div className='relative bg-[#081122] text-white rounded-lg shadow-lg w-[90%] md:w-[50%] lg:w-[40%] overflow-hidden'>
+					{/* Header Section */}
+					<div className='flex justify-between items-center border-b border-[#3576df] p-4'>
+						<h2 className='text-lg font-semibold text-white'>Code</h2>
 						<div className='flex'>
+							{/* Copy Button */}
 							<button
-								className='m-2 px-2 py-1 bg-blue-500 hover:bg-blue-700 text-white font-bold text-xs rounded'
+								className='m-2 px-3 py-1 bg-[#3576df] hover:bg-[#4a8af4] text-white font-bold text-xs rounded-lg shadow-md transition'
 								onClick={handleCopyCode}>
 								Copy
 							</button>
+							{/* Close Button */}
 							<button
-								className='text-gray-500 hover:text-gray-600 mr-2'
+								className='m-2 px-3 py-1 bg-red-500 hover:bg-red-700 text-white font-bold text-xs rounded-lg shadow-md transition'
 								onClick={onClose}>
 								Close
 							</button>
 						</div>
 					</div>
 
-					<div className='relative p-2 '>
+					{/* Code Display Section */}
+					<div className='relative p-4'>
 						<SyntaxHighlighter
 							language='javascript'
 							style={atomDark}
-							className='p-2 overflow-x-auto rounded-lg'
+							className='p-4 overflow-x-auto rounded-lg border border-[#3576df] bg-[#0d1b2a]'
 							showLineNumbers>
 							{code}
 						</SyntaxHighlighter>
@@ -117,7 +127,7 @@ const HistoryLog = () => {
 			}
 		});
 
-		return () => unsubscribe(); 
+		return () => unsubscribe();
 	}, []);
 
 	const handleCodeClick = (code) => {
@@ -164,106 +174,85 @@ const HistoryLog = () => {
 	return (
 		<>
 			<ParticleBackground />
+			<Nav></Nav>
+			{/* Full Dark Background */}
 			<div className='max-w-screen-lg mx-auto'>
-				<ToastContainer position='top-right' />{" "}
-				{/* Add ToastContainer for notifications */}
-				<h1 className='text-3xl font-bold  text-white p-5'>History Log</h1>
+				<ToastContainer position='top-right' />
+				<h1 className='text-3xl font-bold text-white p-5 text-center'>
+					History Log
+				</h1>
 			</div>
-			<div className='p-10'>
-				<table className='min-w-full divide-y divide-gray-200'>
-					<thead className='bg-gray-50'>
-						<tr>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Date
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Timestamp
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Hours Ago
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Code
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Status
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Language
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Memory
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Time
-							</th>
-							<th
-								scope='col'
-								className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
-								Actions
-							</th>
-						</tr>
-					</thead>
-					<tbody className='bg-white divide-y divide-gray-200'>
-						{data.map((item, index) => (
-							<tr
-								key={index}
-								className='bg-gray-100'>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.timestamp.split(",")[0]}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.timestamp.split(",")[1]}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.hoursAgo}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									<button
-										className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2'
-										onClick={() => handleCodeClick(item.code)}>
-										Show Code
-									</button>
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.status}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.language}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.memory}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									{item.time}
-								</td>
-								<td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
-									<button
-										className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-										onClick={() => handleDeleteLog(item.id)}>
-										Delete
-									</button>
-								</td>
+
+			{/* Table Container */}
+			<div className='p-6 bg-[#020817] rounded-lg shadow-lg max-w-screen-xl mx-auto'>
+				<div className='overflow-x-auto'>
+					<table className='min-w-full border-collapse border border-[#3576df] rounded-lg shadow-lg'>
+						{/* Table Header */}
+						<thead className='bg-[#3576df] text-white uppercase tracking-wider'>
+							<tr>
+								{[
+									"Date",
+									"Timestamp",
+									"Hours Ago",
+									"Code",
+									"Status",
+									"Language",
+									"Memory",
+									"Time",
+									"Actions",
+								].map((header) => (
+									<th
+										key={header}
+										className='px-6 py-3 text-left text-xs font-semibold'>
+										{header}
+									</th>
+								))}
 							</tr>
-						))}
-					</tbody>
-				</table>
+						</thead>
+
+						{/* Table Body */}
+						<tbody className='divide-y divide-[#3576df] bg-[#081122] text-white'>
+							{data.map((item, index) => (
+								<tr
+									key={index}
+									className='hover:bg-[#122137] transition-all duration-200'>
+									<td className='px-6 py-4 text-sm'>
+										{item.timestamp.split(",")[0]}
+									</td>
+									<td className='px-6 py-4 text-sm'>
+										{item.timestamp.split(",")[1]}
+									</td>
+									<td className='px-6 py-4 text-sm'>{item.hoursAgo}</td>
+
+									{/* Code Button */}
+									<td className='px-6 py-4 text-sm'>
+										<button
+											className='bg-[#3576df] hover:bg-[#4a8af4] text-white font-semibold py-2 px-4 rounded-lg shadow-md transition'
+											onClick={() => handleCodeClick(item.code)}>
+											Show Code
+										</button>
+									</td>
+
+									<td className='px-6 py-4 text-sm'>{item.status}</td>
+									<td className='px-6 py-4 text-sm'>{item.language}</td>
+									<td className='px-6 py-4 text-sm'>{item.memory}</td>
+									<td className='px-6 py-4 text-sm'>{item.time}</td>
+
+									{/* Delete Button */}
+									<td className='px-6 py-4 text-sm'>
+										<button
+											className='bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition'
+											onClick={() => handleDeleteLog(item.id)}>
+											Delete
+										</button>
+									</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				{/* Popup for Code Display */}
 				{isPopupOpen && (
 					<CodePopup
 						code={selectedCode}

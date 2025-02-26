@@ -3,12 +3,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
-
 import li from "../../assets/loginback.png";
+import ParticleBackground from "../Particle";
 
 export const Register = () => {
 	const [showPassword, setShowPassword] = useState(false); // State to track password visibility
-
 	const [email, setEmail] = useState("");
 	const [error, setError] = useState("");
 	const [password, setPassword] = useState("");
@@ -28,48 +27,61 @@ export const Register = () => {
 
 	return (
 		<>
+			<ParticleBackground />
 			<section className='regcon min-h-screen flex items-center justify-center '>
-				<div className='bg-[#31363c] flex rounded-2xl shadow-lg max-w-3xl p-4'>
-					<div className='sm:block hidden w-1/2'>
+				{/* Register Container */}
+				<div className='bg-[#020817] flex rounded-2xl shadow-lg border-4 border-[#3576df] max-w-3xl p-6 w-full'>
+					{/* Left Section (Image) */}
+					<div className='sm:block hidden w-1/2  rounded-2xl p-2'>
 						<Link to='/login'>
 							<img
-								className='sm:block hidden rounded-2xl'
+								className='rounded-xl'
 								alt='img-login'
 								src={li}
 							/>
 						</Link>
 					</div>
-					<div className='sm:w-1/2 px-16'>
-						<h2 className='font-bold text-2xl text-[white] text-center'>
+
+					{/* Right Section (Form) */}
+					<div className='sm:w-1/2 px-10'>
+						<h2 className='font-bold text-2xl text-white text-center'>
 							Register
 						</h2>
-						<p className='text-sm mt-7 text-[#ebdede] text-opacity-70 text-center'>
+						<p className='text-sm mt-5 text-gray-300 text-center'>
 							If you don't have an account, create it now!
 						</p>
+
+						{/* Input Fields */}
 						<form
 							className='flex flex-col gap-4'
 							onSubmit={handleSubmit}>
-							{error && <h2 className='text-red'>{error}</h2>}
+							{error && (
+								<h2 className='text-red-500 text-sm mt-2 text-center'>
+									{error}
+								</h2>
+							)}
+
 							<input
-								className='p-2 mt-5 rounded-xl border'
+								className='p-2 mt-6 rounded-lg bg-[#1a1d22] text-white border border-gray-500 focus:border-[#3576df] outline-none'
 								type='text'
 								name='email'
-								placeholder='Your email'
+								placeholder='Your Email'
 								onChange={(event) => setEmail(event.target.value)}
 							/>
+
 							<div className='relative flex items-center'>
 								<input
-									className='p-2 mt-2 rounded-xl border w-full'
+									className='p-2 mt-2 rounded-lg bg-[#1a1d22] text-white border border-gray-500 focus:border-[#3576df] outline-none w-full'
 									type={showPassword ? "text" : "password"}
 									name='password'
-									placeholder='Your password'
+									placeholder='Your Password'
 									onChange={(event) => setPassword(event.target.value)}
 								/>
 								<svg
-									className='bi bi-eye-fill absolute right-4 top-5 cursor-pointer'
+									className='bi bi-eye-fill absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer'
 									xmlns='http://www.w3.org/2000/svg'
-									width='16'
-									height='16'
+									width='18'
+									height='18'
 									fill='gray'
 									viewBox='0 0 16 16'
 									onClick={() => setShowPassword(!showPassword)}>
@@ -83,27 +95,25 @@ export const Register = () => {
 									/>
 								</svg>
 							</div>
-							<button
-								className='Login-button rounded-xl text-white py-2 mt-2'
-								type='Submit'>
+
+							{/* Register Button */}
+							<button className='bg-[#3576df] hover:bg-[#285bb7] text-white rounded-lg py-2 mt-4 transition-all'>
 								Register
 							</button>
 						</form>
-						<div className='mt-10 grid grid-cols-3 items-center text-gray-400'>
-							<hr className='border-gray-400' />
-							<p className='text-center text-sm text-white'>OR</p>
-							<hr className='border-gray-400' />
+
+						{/* Divider */}
+						<div className='mt-8 flex items-center text-gray-400'>
+							<hr className='flex-1 border-gray-500' />
+							<p className='px-2 text-sm'>OR</p>
+							<hr className='flex-1 border-gray-500' />
 						</div>
-						<div className='mt-3 text-xs flex justify-between items-cente'>
-							<p>
-								<a
-									href='#'
-									className='text-white'>
-									If you already have an account?
-								</a>
-							</p>
+
+						{/* Already Have an Account */}
+						<div className='mt-4 text-xs flex justify-between items-center'>
+							<p className='text-gray-300'>Already have an account?</p>
 							<Link to='/login'>
-								<button className='py-2 px-5 bg-white text-black border rounded-xl'>
+								<button className='py-2 px-5 bg-[#3576df] text-white border border-[#3576df] rounded-lg hover:bg-[#285bb7] transition'>
 									Login
 								</button>
 							</Link>

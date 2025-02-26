@@ -1,10 +1,10 @@
 /** @format */
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { auth } from "../../firebase/firebaseconfig";
-import { useNavigate } from "react-router-dom";
 import { useUserAuth } from "../../context/UserAuthContext";
 import registerimg from "../../assets/registerimg.png";
+import ParticleBackground from "../Particle";
 
 export const Login = () => {
 	const [email, setEmail] = useState("");
@@ -18,21 +18,37 @@ export const Login = () => {
 		setError("");
 		try {
 			await logIn(email, password);
+			const userName = email.split("@")[0];
+
 			localStorage.setItem(
 				"profileImage",
 				"https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg"
 			);
+			localStorage.setItem("userEmail", email);
+			localStorage.setItem("userName", userName);
+
 			navigate("/compiler");
 		} catch (err) {
 			setError(err.message);
 		}
 	};
+
 	const handleGoogleSignIn = async (e) => {
 		e.preventDefault();
 		try {
 			await googleSignIn();
-			const url = auth.currentUser.photoURL;
-			localStorage.setItem("profileImage", url);
+			const user = auth.currentUser;
+
+			const userName = user.displayName || user.email.split("@")[0];
+			const userEmail = user.email;
+			const profileImage =
+				user.photoURL ||
+				"https://static.vecteezy.com/system/resources/previews/005/005/788/original/user-icon-in-trendy-flat-style-isolated-on-grey-background-user-symbol-for-your-web-site-design-logo-app-ui-illustration-eps10-free-vector.jpg";
+
+			localStorage.setItem("profileImage", profileImage);
+			localStorage.setItem("userEmail", userEmail);
+			localStorage.setItem("userName", userName);
+
 			navigate("/compiler");
 		} catch (error) {
 			console.log(error.message);
@@ -41,43 +57,44 @@ export const Login = () => {
 
 	return (
 		<>
-			<section className='logcon min-h-screen flex items-center justify-center'>
-				{/* Login container */}
-				<div className='bg-[#31363c] flex rounded-2xl shadow-lg max-w-3xl p-4'>
-					{/* Form */}
-					<div className='sm:w-1/2 px-16'>
-						<h2 className='font-bold text-2xl text-[white] text-center'>
-							Login
-						</h2>
-						<p className='text-sm mt-7 text-[white] text-opacity-70 text-center'>
-							If you're already a member, easily log in
-						</p>
-						{error && <h2 className='text-red'>{error}</h2>}
+			<ParticleBackground />
 
-						{/* Data entry group */}
+			<section className='logcon min-h-screen flex items-center justify-center '>
+				{/* Login Container */}
+				<div className='bg-[#020817] flex rounded-2xl shadow-lg border-4 border-[#3576df] max-w-3xl p-6 w-full'>
+					{/* Left Section (Form) */}
+					<div className='sm:w-1/2 px-10'>
+						<h2 className='font-bold text-2xl text-white text-center'>Login</h2>
+						<p className='text-sm mt-5 text-gray-300 text-center'>
+							If you're already a member, easily log in.
+						</p>
+
+						{error && (
+							<h2 className='text-red-500 text-sm mt-2 text-center'>{error}</h2>
+						)}
+
+						{/* Input Fields */}
 						<form
 							onSubmit={handleSubmit}
-							className='flex flex-col gap-4'
-							action=''>
+							className='flex flex-col gap-4'>
 							<input
-								className='p-2 mt-8 rounded-xl border'
+								className='p-2 mt-6 rounded-lg bg-[#1a1d22] text-white border border-gray-500 focus:border-[#3576df] outline-none'
 								type='text'
 								name='email'
-								placeholder='Your email'
+								placeholder='Your Email'
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 							<div className='relative'>
 								<input
-									className='p-2 mt-3 rounded-xl border w-full'
+									className='p-2 mt-3 rounded-lg bg-[#1a1d22] text-white border border-gray-500 focus:border-[#3576df] outline-none w-full'
 									type='password'
 									name='password'
-									placeholder='Your password'
+									placeholder='Your Password'
 									onChange={(e) => setPassword(e.target.value)}
 								/>
-
 								{/* SVG Eye */}
 								<svg
-									className='bi bi-eye-fill absolute top-1/2 right-4 translate-y-1/2top-6'
+									className='bi bi-eye-fill absolute top-1/2 right-4 transform -translate-y-1/2'
 									xmlns='http://www.w3.org/2000/svg'
 									width='16'
 									height='16'
@@ -88,62 +105,62 @@ export const Login = () => {
 								</svg>
 							</div>
 
-							<button
-								className='Login-button rounded-xl text-white py-2 mt-2'
-								type='submit'>
+							{/* Login Button */}
+							<button className='bg-[#3576df] hover:bg-[#285bb7] text-white rounded-lg py-2 mt-4 transition-all'>
 								Login
 							</button>
 						</form>
-						<div className='mt-10 grid grid-cols-3 items-center text-gray-400'>
-							<hr className='border-gray-400' />
-							<p className='text-center text-sm'>OR</p>
-							<hr className='border-gray-400' />
+
+						{/* Divider */}
+						<div className='mt-8 flex items-center text-gray-400'>
+							<hr className='flex-1 border-gray-500' />
+							<p className='px-2 text-sm'>OR</p>
+							<hr className='flex-1 border-gray-500' />
 						</div>
+
+						{/* Google Login Button */}
 						<button
 							onClick={handleGoogleSignIn}
-							className='bg-white border py-2 w-full rounded-xl mt-5 flex justify-center text-sm'>
+							className='bg-white border py-2 w-full rounded-lg mt-5 flex justify-center items-center text-sm hover:bg-gray-200 transition'>
 							<img
-								className='w-6 mr-3'
+								className='w-5 mr-3'
 								src='./img/google_logo_icon.png'
 								alt=''
 							/>
 							Login with Google
 						</button>
-						<p className='mt-5 text-xs border-b border-gray-400 py-4'>
+
+						{/* Forgot Password */}
+						<p className='mt-5 text-xs text-gray-300 text-center'>
 							<a
-								href=''
-								className='text-white'>
-								Forgot Your password?
+								href='#'
+								className='hover:text-white transition'>
+								Forgot your password?
 							</a>
 						</p>
-						<div className='mt-3 text-xs flex justify-between items-cente'>
-							<p>
-								<a
-									href='#'
-									className='text-white'>
-									If you don't have an account?
-								</a>
-							</p>
+
+						{/* Sign Up Link */}
+						<div className='mt-4 text-xs flex justify-between items-center'>
+							<p className='text-gray-300'>Don't have an account?</p>
 							<Link to='/register'>
-								<button className='py-2 px-5 bg-white text-black  border rounded-xl'>
-									register
+								<button className='py-2 px-5 bg-[#3576df] text-white border border-[#3576df] rounded-lg hover:bg-[#285bb7] transition'>
+									Register
 								</button>
 							</Link>
 						</div>
 					</div>
 
-					{/* Image */}
-					<div className='sm:block hidden w-1/2'>
+					{/* Right Section (Image) */}
+					<div className='sm:block hidden w-1/2 '>
 						<Link to='/register'>
 							<img
-								className='sm:block hidden rounded-2xl'
+								className='rounded-2xl'
 								alt='img-login'
 								src={registerimg}
 							/>
 						</Link>
 					</div>
 				</div>
-
 			</section>
 		</>
 	);

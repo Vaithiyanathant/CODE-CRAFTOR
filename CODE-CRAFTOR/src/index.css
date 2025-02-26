@@ -23,16 +23,17 @@ h2, p {
 a:hover {
     color:#44bb44;
 }
-
+/*
 .regcon{
 background: linear-gradient(0.65turn, rgb(0, 0, 0), rgb(33, 38, 45), rgb(0, 0, 0))
-}
-
+}*/
+/*
 .logcon{
 background: linear-gradient(0.65turn, rgb(0, 0, 0), rgb(33, 38, 45), rgb(0, 0, 0))
-}
+}*/
 
 
 h1.cursor {
     color: #ffffff; 
 }
+

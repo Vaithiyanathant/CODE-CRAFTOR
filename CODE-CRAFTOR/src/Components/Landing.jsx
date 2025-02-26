@@ -198,19 +198,24 @@ const Landing = () => {
 				draggable
 				pauseOnHover
 			/>
-			<div className='flex flex-row flex-wrap px-4 py-2 space-x-4'>
-				<div className='px- py-2'>
+
+			{/* Top Menu Section */}
+			<div className='flex flex-row flex-wrap px-6 py-3 space-x-4 bg-[#020817] text-white'>
+				<div className='px-3 py-1'>
 					<LanguagesDropdown onSelectChange={onSelectChange} />
 				</div>
-				<div className='px-4 py-2'>
+				<div className='px-4 py-1'>
 					<ThemeDropdown
 						handleThemeChange={handleThemeChange}
 						theme={theme}
 					/>
 				</div>
 			</div>
-			<div className='main flex flex-col lg:flex-row space-x-4 items-start px-4 py-4'>
-				<div className='edit flex flex-col justify-start items-end w-full lg:w-2/3'>
+
+			{/* Main Section */}
+			<div className='main flex flex-col lg:flex-row space-x-4 items-start px-6 py-6 bg-[#020817] text-white'>
+				{/* Code Editor Section */}
+				<div className='edit flex flex-col justify-start items-end w-full lg:w-2/3 bg-[#020817] shadow-lg rounded-lg p-4'>
 					<CodeEditorWindow
 						code={code}
 						onChange={onChange}
@@ -219,8 +224,13 @@ const Landing = () => {
 						outputDetails={outputDetails}
 					/>
 				</div>
+
+				{/* Output & Controls Section */}
 				<div className='flex flex-shrink-0 w-full lg:w-1/3 flex-col'>
+					{/* Output Window */}
 					<OutputWindow outputDetails={outputDetails} />
+
+					{/* Custom Input & Compile Button */}
 					<div className='flex flex-col items-center my-5'>
 						<CustomInput
 							customInput={customInput}
@@ -230,13 +240,15 @@ const Landing = () => {
 							onClick={handleCompile}
 							disabled={!code}
 							className={classnames(
-								"tc mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_#1a2d37] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
-								!code ? "opacity-50" : ""
+								"mt-4 bg-[#3576df] text-white z-10 rounded-lg shadow-md px-6 py-3 hover:bg-[#4a8af4] transition duration-200 flex-shrink-0 font-semibold",
+								!code ? "opacity-50 cursor-not-allowed" : ""
 							)}>
 							{processing ? "Processing..." : "Compile and Execute"}
 						</button>
 					</div>
-					<div className='outerd'>
+
+					{/* Output Details Section */}
+					<div className='outerd bg-[#020817] rounded-lg shadow-lg p-4'>
 						<div className='outd'>
 							{outputDetails && <OutputDetails outputDetails={outputDetails} />}
 						</div>

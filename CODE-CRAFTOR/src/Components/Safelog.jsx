@@ -93,35 +93,48 @@ export const Safelog = () => {
 
 	return (
 		<>
-			<ParticleBackground></ParticleBackground>
-			<Nav></Nav>
-			<div className='container mx-auto mt-5'>
-				<h1 className='text-white text-2xl font-bold mb-3'>Safelog</h1>
-				<ul className='divide-y divide-gray-300'>
+			{/* Background & Navbar */}
+			<ParticleBackground />
+			<Nav />
+
+			{/* Main Container */}
+			<div className='max-w-4xl mx-auto mt-8 p-6 bg-[#020817] shadow-lg rounded-lg'>
+				<h1 className='text-3xl font-bold text-white mb-5 text-center'>
+					Safe Log
+				</h1>
+
+				{/* List Container */}
+				<ul className='divide-y divide-[#3576df]'>
 					{safedata.map((item) => (
 						<li
 							key={item.id}
-							className='py-4'>
-							<div className='flex flex-col md:flex-row md:justify-between items-center'>
-								<div className='text-white'>
-									<div className='text-gray-500 mt-2 md:mt-0'>
-										{item.hoursAgo}
+							className='py-6 px-4 bg-[#081122] rounded-lg shadow-md hover:bg-[#122137] transition-all duration-200 mb-4'>
+							{/* Content Row */}
+							<div className='flex flex-col md:flex-row md:justify-between items-start md:items-center'>
+								{/* Left Section (Details) */}
+								<div className='text-white w-full'>
+									<div className='text-[#4a8af4] text-sm mb-1'>
+										{item.hoursAgo} ago
 									</div>
-									<p className='text-sm'>{item.uid}</p>
+									<p className='text-gray-400 text-sm'>{item.uid}</p>
+									<p className='text-lg font-semibold text-[#3576df]'>
+										{item.title}
+									</p>
+									<p className='text-gray-400 text-sm mb-2'>{item.timestamp}</p>
 
-									<p className='font-bold'>{item.title}</p>
-									<p className='text-sm'>{item.timestamp}</p>
-									{/* Syntax highlighting */}
-									{/* Copy button */}
+									{/* Copy Button */}
 									<button
-										className='text-sm bg-gray-800 text-white px-2 py-1 rounded hover:bg-gray-700'
+										className='text-sm bg-[#3576df] hover:bg-[#4a8af4] text-white px-3 py-1 rounded-lg shadow-md transition mb-2'
 										onClick={() => handleCopy(item.code)}>
-										{copied ? "Copied!" : "Copy"}
+										{copied ? "Copied!" : "Copy Code"}
 									</button>
 
+									{/* Syntax Highlighted Code */}
 									<SyntaxHighlighter
 										language='javascript'
-										style={atomDark}>
+										style={atomDark}
+										className='p-4 rounded-lg border border-[#3576df] bg-[#0d1b2a]'
+										showLineNumbers>
 										{item.code}
 									</SyntaxHighlighter>
 								</div>

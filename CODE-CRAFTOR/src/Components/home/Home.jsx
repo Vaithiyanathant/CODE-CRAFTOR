@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { cursor, useTypewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
 import homelogo from "../../assets/logoforhome.png";
+import ParticleBackground from "../Particle";
+import { useMemo } from "react"; // ✅ Memoization added
 
 export const Home = () => {
 	const github = () => {
@@ -21,8 +23,12 @@ export const Home = () => {
 			hideWhenNotStarted: false, // Do not hide the cursor when typing hasn't started
 		},
 	});
+		const memoizedParticles = useMemo(() => <ParticleBackground />, []);
+
 	return (
 		<HomeStyled>
+			{memoizedParticles}
+
 			<div className='home logcon'>
 				<div className='content'>
 					<div className='left'>
@@ -33,14 +39,38 @@ export const Home = () => {
 							</h1>
 							<h3>tool for coders</h3>
 							<p>
-        <li><strong>Efficient and Secure Coding</strong>: Advanced online compiler supporting multiple languages.</li>
-        <li><strong>Safe Save Mode</strong>: Auto-saves work to prevent data loss.</li>
-        <li><strong>History Log</strong>: Tracks code changes and allows reversion to previous versions.</li>
-        <li><strong>Real-Time Collaboration</strong>: Shared coding sessions and integrated chat.</li>
-        <li><strong>User-Friendly Interface</strong>: Enhanced coding experience with syntax highlighting and debugging tools.</li>
-        <li><strong>Cloud Storage</strong>: Securely store projects and access them anytime.</li>
-        <li><strong>Ideal for Developers</strong>: Suitable for both individual developers and collaborative teams.</li>
-        <li><strong>Start Coding Today</strong>: Begin coding with CodeCraftor to elevate your development process!</li>
+								<li>
+									<strong>Efficient and Secure Coding</strong>: Advanced online
+									compiler supporting multiple languages.
+								</li>
+								<li>
+									<strong>Safe Save Mode</strong>: Auto-saves work to prevent
+									data loss.
+								</li>
+								<li>
+									<strong>History Log</strong>: Tracks code changes and allows
+									reversion to previous versions.
+								</li>
+								<li>
+									<strong>Real-Time Collaboration</strong>: Shared coding
+									sessions and integrated chat.
+								</li>
+								<li>
+									<strong>User-Friendly Interface</strong>: Enhanced coding
+									experience with syntax highlighting and debugging tools.
+								</li>
+								<li>
+									<strong>Cloud Storage</strong>: Securely store projects and
+									access them anytime.
+								</li>
+								<li>
+									<strong>Ideal for Developers</strong>: Suitable for both
+									individual developers and collaborative teams.
+								</li>
+								<li>
+									<strong>Start Coding Today</strong>: Begin coding with
+									CodeCraftor to elevate your development process!
+								</li>
 							</p>
 							<div className='btns'>
 								<Link
@@ -66,7 +96,8 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className='right'>
-						<img className="homelogo"
+						<img
+							className='homelogo'
 							alt='logo'
 							src={homelogo}
 						/>
@@ -83,7 +114,7 @@ const HomeStyled = styled.div`
 	}
 	.home {
 		/* background: rgb(33, 38, 45); */
-		background: black;
+		/*background: #020817;*/
 		height: 100vh;
 		overflow: auto;
 		display: flex;
@@ -91,7 +122,7 @@ const HomeStyled = styled.div`
 		justify-content: center;
 		align-items: center;
 		.content {
-			border: 0.3rem solid rgb(48, 55, 60);
+			border: 0.3rem solid #3b82f6;
 			display: flex;
 			justify-content: center;
 			border-radius: 1.5rem;
