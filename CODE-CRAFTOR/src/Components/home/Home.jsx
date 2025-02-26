@@ -4,12 +4,25 @@ import { cursor, useTypewriter } from "react-simple-typewriter";
 import { Link } from "react-router-dom";
 import homelogo from "../../assets/logoforhome.png";
 import ParticleBackground from "../Particle";
-import { useMemo } from "react"; // ✅ Memoization added
+import Loader from "../Loader"; // Import your loader component
+import { useEffect, useState, useMemo } from "react"; // ✅ Added useState & useEffect
 
 export const Home = () => {
+	const [loading, setLoading] = useState(true); // Loader state
+
+	// Show loader for 2 seconds when the component mounts
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 3000); // Loader duration (adjust as needed)
+
+		return () => clearTimeout(timer); // Cleanup timer
+	}, []);
+
 	const github = () => {
 		window.open("https://github.com/Vaithiyanathant/CODE-CRAFTOR", "_blank");
 	};
+
 	const [typeEffect] = useTypewriter({
 		words: ["CodeCraftor", "a tool for coders"],
 		loop: { loopCount: 1 },
@@ -18,12 +31,18 @@ export const Home = () => {
 		cursor: {
 			show: true, // Show the cursor
 			blink: true, // Make the cursor blink
-			element: "|", // You can customize the cursor element
-			hideWhenDone: true, // Hide the cursor when typing is done
-			hideWhenNotStarted: false, // Do not hide the cursor when typing hasn't started
+			element: "|", // Custom cursor symbol
+			hideWhenDone: true, // Hide cursor after typing
+			hideWhenNotStarted: false, // Keep cursor visible before typing starts
 		},
 	});
-		const memoizedParticles = useMemo(() => <ParticleBackground />, []);
+
+	const memoizedParticles = useMemo(() => <ParticleBackground />, []);
+
+	// Show loader before displaying the Home page
+	if (loading) {
+		return <Loader />; // Show loader first
+	}
 
 	return (
 		<HomeStyled>
@@ -107,7 +126,6 @@ export const Home = () => {
 		</HomeStyled>
 	);
 };
-
 const HomeStyled = styled.div`
 	* {
 		transition: all 150ms ease-in-out;

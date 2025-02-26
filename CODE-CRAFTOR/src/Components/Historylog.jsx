@@ -18,6 +18,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ParticleBackground from "./Particle";
 import Nav from "./home/Nav";
+import Loader from "./Loader";
 
 const CodePopup = ({ code, onClose }) => {
 	const [copied, setCopied] = useState(false);
@@ -164,7 +165,7 @@ const HistoryLog = () => {
 		}
 	};
 	if (loading) {
-		return <div>Loading...</div>;
+		return <Loader />;
 	}
 
 	if (error) {
