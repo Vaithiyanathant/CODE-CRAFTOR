@@ -9,6 +9,7 @@ import ParticleBackground from "./Particle";
 import Nav from "./home/Nav";
 import ReactECharts from "echarts-for-react";
 import Loader from "./Loader";
+import { Link } from "react-router-dom";
 
 export default function Dashboard() {
 	const [user, setUser] = useState({
@@ -16,6 +17,7 @@ export default function Dashboard() {
 		email: "",
 		profileImage: "",
 	});
+
 	const [historyData, setHistoryData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [chartData, setChartData] = useState([]);
@@ -25,46 +27,48 @@ export default function Dashboard() {
 	useEffect(() => {
 		const fetchData = async (currentUserUid) => {
 			try {
-				const historyQuery = query(
+				const q = query(
 					collection(db, "log"),
 					where("uid", "==", currentUserUid),
 					orderBy("timestamp", "desc")
 				);
+				const querySnapshot = await getDocs(q);
 
-				const historySnapshot = await getDocs(historyQuery);
-
-				const historyArray = historySnapshot.docs.map((doc) => ({
-					id: doc.id,
-					...doc.data(),
-					timestamp: new Date(
-						doc.data().timestamp.seconds * 1000
-					).toLocaleDateString(),
-				}));
-
-				setHistoryData(historyArray);
-
-				// Process data for charts
+				const historyArray = [];
 				const logCountByDate = {};
 				const statusCount = { Success: 0, Failure: 0, Error: 0 };
 				const languageUsage = {};
 
-				historyArray.forEach((entry) => {
-					const date = entry.timestamp;
-					logCountByDate[date] = (logCountByDate[date] || 0) + 1;
+				querySnapshot.forEach((doc) => {
+					const logData = doc.data();
+					const timestamp = new Date(logData.timestamp.seconds * 1000);
+					const dateStr = timestamp.toISOString().split("T")[0]; // YYYY-MM-DD format
 
-					// Status count
-					statusCount[entry.status] = (statusCount[entry.status] || 0) + 1;
+					// Store history data
+					historyArray.push({
+						id: doc.id,
+						...logData,
+						timestamp: dateStr,
+					});
 
-					// Language count
-					languageUsage[entry.language] =
-						(languageUsage[entry.language] || 0) + 1;
+					// Aggregate log counts per day
+					logCountByDate[dateStr] = (logCountByDate[dateStr] || 0) + 1;
+
+					// Count status occurrences
+					statusCount[logData.status] = (statusCount[logData.status] || 0) + 1;
+
+					// Count language usage
+					languageUsage[logData.language] =
+						(languageUsage[logData.language] || 0) + 1;
 				});
 
-				// Prepare chart data
-				const formattedChartData = Object.keys(logCountByDate).map((date) => ({
-					date,
-					logs: logCountByDate[date],
-				}));
+				// Convert log count object into sorted array
+				const formattedChartData = Object.keys(logCountByDate)
+					.sort() // Sort dates
+					.map((date) => ({
+						date,
+						logs: logCountByDate[date],
+					}));
 
 				const formattedLanguageData = Object.keys(languageUsage).map(
 					(lang) => ({
@@ -73,6 +77,7 @@ export default function Dashboard() {
 					})
 				);
 
+				setHistoryData(historyArray);
 				setChartData(formattedChartData);
 				setStatusData([
 					{ name: "Success", value: statusCount.Success },
@@ -80,7 +85,6 @@ export default function Dashboard() {
 					{ name: "Error", value: statusCount.Error },
 				]);
 				setLanguageData(formattedLanguageData);
-
 				setLoading(false);
 			} catch (error) {
 				console.error("Error fetching data:", error);
@@ -106,13 +110,13 @@ export default function Dashboard() {
 		return () => unsubscribe();
 	}, []);
 
-	// 📈 Smaller Stacked Area Chart
+	// 📈 Line Chart for Daily Log Counts
 	const getAreaChartOptions = () => ({
 		tooltip: { trigger: "axis" },
 		grid: { left: "5%", right: "5%", bottom: "10%", containLabel: true },
 		xAxis: {
 			type: "category",
-			data: chartData.map((item) => item.date),
+			data: chartData.map((item) => item.date), // Daily logs by date
 			axisLabel: { color: "#ffffff" },
 		},
 		yAxis: {
@@ -121,9 +125,9 @@ export default function Dashboard() {
 		},
 		series: [
 			{
-				name: "Logs",
+				name: "Logs per Day",
 				type: "line",
-				stack: "Total",
+				smooth: true,
 				areaStyle: {
 					color: {
 						type: "linear",
@@ -137,7 +141,7 @@ export default function Dashboard() {
 						],
 					},
 				},
-				data: chartData.map((item) => item.logs),
+				data: chartData.map((item) => item.logs), // Log count per day
 				color: "#3576df",
 			},
 		],
@@ -175,7 +179,6 @@ export default function Dashboard() {
 			<div className='max-w-7xl mx-auto p-8'>
 				{/* Profile & Area Chart Section */}
 				<div className='flex flex-col md:flex-row gap-6 items-start'>
-					{/* Profile Section */}
 					<div className='bg-[#020817] text-white p-8 rounded-lg shadow-lg border border-[#3576df] w-full md:w-1/4 flex flex-col items-center'>
 						{/* Profile Image */}
 						<img
@@ -183,31 +186,40 @@ export default function Dashboard() {
 							src={user.profileImage}
 							alt='Profile'
 						/>
+
 						{/* Name */}
 						<h2 className='text-2xl font-bold text-[#3576df] mb-2'>
 							{user.name}
 						</h2>
+
 						{/* Email */}
 						<p className='text-gray-400 text-lg mb-4'>{user.email}</p>
-						{/* Empty space for better structure */}
-						<div className='h-4'></div>
-						{/* Empty space */}
-						<div className='h-4'></div>
-						{/* Empty space */}
-						<div className='h-4'></div>
-						{/* Empty space */}
-						<div className='h-4'></div>
-						{/* Empty space */}
-						<div className='h-4'></div>
-						{/* Empty space */}
-						<div className='h-4'></div> {/* Empty space */}
-						<div className='h-4'></div> {/* Empty space */}
-						<div className='h-4'></div> {/* Empty space */}
-						<div className='h-4'></div> {/* Empty space */}
-						<div className='h-4'></div>
-					</div>
 
-					{/* Smaller Gradient Stacked Area Chart */}
+						{/* Buttons Section */}
+						<div className='w-full flex flex-col gap-4 mt-2'>
+							{/* Compiler Button */}
+							<Link
+								to='/compiler'
+								className='bg-[#3576df] hover:bg-[#1E40AF] text-white font-semibold py-2 px-6 rounded-lg text-center shadow-md transition duration-300'>
+								⚡ Compiler
+							</Link>
+
+							{/* Save Log Button */}
+							<Link
+								to='/safelog'
+								className='bg-[#1E40AF] hover:bg-[#3576df] text-white font-semibold py-2 px-6 rounded-lg text-center shadow-md transition duration-300'>
+								📌 Safe Save Log
+							</Link>
+
+							{/* History Log Button */}
+							<Link
+								to='/history'
+								className='bg-[#60A5FA] hover:bg-[#3576df] text-white font-semibold py-2 px-6 rounded-lg text-center shadow-md transition duration-300'>
+								📜 History Log
+							</Link>
+						</div>
+					</div>
+					;{/* Line Chart for Daily Logs */}
 					<div className='bg-[#020817] p-6 rounded-lg shadow-lg border border-[#3576df] w-full md:w-3/4'>
 						<h3 className='text-lg font-semibold text-white mb-4'>
 							📈 Logs Over Time
@@ -247,3 +259,4 @@ export default function Dashboard() {
 		</>
 	);
 }
+
