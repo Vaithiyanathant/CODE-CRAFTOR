@@ -17,7 +17,7 @@ Welcome to **CodeCraftor** – an advanced online compiler designed for efficien
 Begin coding with CodeCraftor to elevate your development process! [Click here !!](https://code-craftor.vercel.app)
 
 
-![CodeCraftor Banner](https://drive.google.com/uc?export=view&id=1dE-N5dm5o2UOtSNjfv9sDXLnk58pleDK)
+![CodeCraftor Banner](https://drive.google.com/uc?export=view&id=1cnV5_HPApgH-fWsim_9KzUGjBw93Dayr)
 
 ## 🌟 Features
 
@@ -76,27 +76,38 @@ CodeCraftor is built using the following technologies:
 ### 🔐 Login and Register
 
 #### Login Page
-![Login Page](https://drive.google.com/uc?export=view&id=1GTrwnigBZC8Omg7EpAzsrYigJTKLQqtU)
+![Login Page](https://drive.google.com/uc?export=view&id=1VkGaEKrzA7X9PCnELBsyQF_NohQJMdSR)
 *This image shows the login page where users can enter their credentials to access CodeCraftor. The page features a clean and intuitive design for easy access.*
 
 #### Register Page
-![Register Page](https://drive.google.com/uc?export=view&id=1HYKF2DAw-iU9H7fR94bFKxWA0mwMjPU3)
+![Register Page](https://drive.google.com/uc?export=view&id=1PopJ28Izsp476cRhm_icFm_HATUI0g-1)
 *This image displays the registration page where new users can create an account. The form includes fields for essential information and a visually appealing layout.*
 
 ### 💻 Compiler Page
 
-![Compiler Page](https://drive.google.com/uc?export=view&id=1HWgSds78buRTd8xEhbmlC13y2cWV3BBF)
+![Compiler Page](https://drive.google.com/uc?export=view&id=19AJNp-6p32xNsFhgVRnuRiDIp_tSAVZs)
+![Compiler Page](https://drive.google.com/uc?export=view&id=1SOvaVCNvOgKve1qDisxzkUXz2OZ6Qok0)
+![Compiler Page](https://drive.google.com/uc?export=view&id=1yCtTrzIRFgF1nXV502_G27RNNZZeI7qy)
+
 *This screenshot showcases the main compiler interface of CodeCraftor. It includes the coding editor with syntax highlighting, options for running the code, and additional tools for debugging and testing.*
 
 ### 🕒 History Log
 
-![History Log](https://drive.google.com/uc?export=view&id=1r3HLjZeSy7t1Wk3dDa6itREbRRHhursI)
+![History Log](https://drive.google.com/uc?export=view&id=1cERvs0FcN3x-Uhd0tIiXmaz5iINCVD9-)
+![History Log](https://drive.google.com/uc?export=view&id=18BYBo5ghqTOJKRNdrN0PZ-5MAFbFqmj_)
+
 *This image provides a view of the history log feature, where users can see a timeline of their code changes. This feature allows users to track progress and revert to previous versions if necessary.*
 
 ### 💾 Safe Save Log
 
-![Safe Save Log](https://drive.google.com/uc?export=view&id=1RQ0Tnki03q4hBU3hxg0KcbAm3rnKK7nu)
+![Safe Save Log](https://drive.google.com/uc?export=view&id=1NftutBw55-qZfwBIXCAg1PBTAh1XTgcM)
 *This screenshot illustrates the safe save log, highlighting the auto-save functionality of CodeCraftor. It ensures that users' work is periodically saved to prevent data loss.*
+
+### 📂 Profile and  🖼️ Logo
+
+![Profile](https://drive.google.com/uc?export=view&id=1QzYBOufoNnpyvkfgjMyOw-yCUODu7rGS)
+![Logo](https://drive.google.com/uc?export=view&id=1dE-N5dm5o2UOtSNjfv9sDXLnk58pleDK)
+
 
 ---
 
