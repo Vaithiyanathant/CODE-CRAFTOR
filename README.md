@@ -17,7 +17,7 @@ Welcome to **CodeCraftor** – an advanced online compiler designed for efficien
 Begin coding with CodeCraftor to elevate your development process! [Click here !!](https://code-craftor.vercel.app)
 
 
-![CodeCraftor Banner](https://drive.google.com/uc?export=view&id=1UXEO4YntNjnLWNn6FdFOVOBL4Km1GhXB)
+![CodeCraftor Banner](https://drive.google.com/uc?export=view&id=1dE-N5dm5o2UOtSNjfv9sDXLnk58pleDK)
 
 ## 🌟 Features
 
