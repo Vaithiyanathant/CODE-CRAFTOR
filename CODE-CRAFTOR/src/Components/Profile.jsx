@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ParticleBackground from "./Particle";
 import Nav from "./home/Nav";
 import ReactECharts from "echarts-for-react";
+import Loader from "./Loader";
 
 export default function Dashboard() {
 	const [user, setUser] = useState({
@@ -162,9 +163,7 @@ export default function Dashboard() {
 	});
 
 	if (loading) {
-		return (
-			<div className='text-white text-center mt-10 text-2xl'>Loading...</div>
-		);
+		return <Loader />;
 	}
 
 	return (

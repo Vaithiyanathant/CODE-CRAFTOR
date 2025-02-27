@@ -8,6 +8,7 @@ import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { auth, db } from "../firebase/firebaseconfig";
 import Nav from "./home/Nav";
 import ParticleBackground from "./Particle";
+import Loader from "./Loader";
 
 export const Safelog = () => {
 	const [safedata, setsafedata] = useState([]);
@@ -84,7 +85,7 @@ export const Safelog = () => {
 	};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <Loader />;
 	}
 
 	if (error) {
