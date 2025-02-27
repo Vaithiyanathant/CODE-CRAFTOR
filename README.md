@@ -103,10 +103,9 @@ CodeCraftor is built using the following technologies:
 ![Safe Save Log](https://drive.google.com/uc?export=view&id=1NftutBw55-qZfwBIXCAg1PBTAh1XTgcM)
 *This screenshot illustrates the safe save log, highlighting the auto-save functionality of CodeCraftor. It ensures that users' work is periodically saved to prevent data loss.*
 
-### 📂 Profile and  🖼️ Logo
+### 📂 Profile 
 
 ![Profile](https://drive.google.com/uc?export=view&id=1QzYBOufoNnpyvkfgjMyOw-yCUODu7rGS)
-![Logo](https://drive.google.com/uc?export=view&id=1dE-N5dm5o2UOtSNjfv9sDXLnk58pleDK)
 
 
 ---
